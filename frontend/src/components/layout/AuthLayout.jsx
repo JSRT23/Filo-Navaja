@@ -8,9 +8,9 @@ import { PageLoader } from '@/components/ui/Feedback';
 export function AuthLayout() {
   return (
     <div className="grid min-h-dvh lg:grid-cols-[1.05fr_1fr]">
-      <aside className="relative hidden overflow-hidden bg-cordovan-950 lg:block">
+      <aside className="relative hidden overflow-hidden bg-onyx-950 lg:block">
         <SmartImage photo="chair" className="absolute inset-0 size-full" sizes="50vw" priority imgClassName="opacity-70" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-cordovan-950 via-cordovan-950/50 to-cordovan-950/30" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-onyx-950 via-onyx-950/50 to-onyx-950/30" />
         <div className="relative flex h-full flex-col justify-between p-12 text-bone-50">
           <Logo />
           <div>

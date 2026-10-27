@@ -51,12 +51,12 @@ export function PublicHeader() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-40 transition-[background-color,box-shadow,backdrop-filter] duration-300',
-        overHero ? 'bg-transparent' : 'bg-cordovan-950/92 shadow-[0_1px_0_rgb(237_229_216/0.08)] backdrop-blur-md',
+        overHero ? 'bg-transparent' : 'bg-onyx-950/92 shadow-[0_1px_0_rgb(237_229_216/0.08)] backdrop-blur-md',
       )}
     >
       <a
         href="#contenido"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-brass-500 focus:px-3 focus:py-2 focus:text-cordovan-950"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-gold-500 focus:px-3 focus:py-2 focus:text-onyx-950"
       >
         Saltar al contenido
       </a>
@@ -79,7 +79,7 @@ export function PublicHeader() {
                 <>
                   {item.label}
                   {isActive && (
-                    <motion.span layoutId="nav-underline" className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-brass-400" />
+                    <motion.span layoutId="nav-underline" className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-gold-400" />
                   )}
                 </>
               )}
@@ -150,7 +150,7 @@ export function PublicHeader() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-50 flex flex-col bg-cordovan-950 md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-onyx-950 md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -181,7 +181,7 @@ export function PublicHeader() {
                   <NavLink
                     to={item.to}
                     end
-                    className={({ isActive }) => cn('display block py-1.5 text-6xl', isActive ? 'text-brass-400' : 'text-bone-50')}
+                    className={({ isActive }) => cn('display block py-1.5 text-6xl', isActive ? 'text-gold-400' : 'text-bone-50')}
                   >
                     {item.label}
                   </NavLink>

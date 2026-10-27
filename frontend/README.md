@@ -127,13 +127,17 @@ frontend/
 
 ## Diseño
 
-- **Paleta:** cordobán `#2B1416` (el cuero de las sillas), hueso `#EDE5D8` (las toallas), latón `#B8925A` (los herrajes), acero `#8E9AA0` (la navaja), verde Sinú `#2F5D50` (el río de Montería) y rojo del poste `#B23A3A`, usado solo para alertas.
+- **Paleta:** negro ónix `#0E0D0B` en la barra de navegación, los encabezados de cada página, el panel lateral y el pie; hueso `#F8F4EE` (las toallas) en el contenido; dorado `#C49A48` (los herrajes) para acciones y acentos, con degradado metálico en el nombre de la portada; acero `#8E9AA0` (la navaja), verde Sinú `#2F5D50` (el río de Montería) y rojo `#B23A3A` solo para alertas. Las franjas del poste de barbero (rojo `#C8102E`, blanco y azul `#1D4F91`) cierran la portada y abren el pie de página.
 - **Tipografía:** Archivo variable. El eje de ancho condensado (62 %) da la voz de la marca en títulos; el cuerpo usa el ancho normal.
 - **Movimiento:** una entrada orquestada en la portada, transiciones entre pasos de la reserva, ventanas y confirmaciones. Respeta «reducir movimiento» del sistema.
 - **Accesibilidad:** foco visible, navegación con teclado, etiquetas en controles, contraste AA y diseño desde 360 px de ancho.
 - **Gráficas:** un solo color de datos validado (croma y contraste ≥ 3:1), barras delgadas y valores en tinta.
 
-Las fotos son de Unsplash (licencia libre) y se cargan desde su CDN; los créditos están en el pie de página. Las fotos de barberos, productos y avatares que suba el equipo quedan en Supabase Storage.
+### Fotos
+
+- Las fotos del sitio, de los barberos demo y de los productos son de Unsplash con su **licencia libre** (uso comercial permitido, sin marcas ni logotipos de terceros). Se cargan desde su CDN con el tamaño justo para cada lugar y los créditos están en el pie de página.
+- Son **ilustrativas**: cada barbero sube su foto real en *Panel › Mi perfil* y la administración cambia las de productos en *Panel › Servicios y productos*. Lo que se sube queda en Supabase Storage.
+- Si una foto no carga (sin conexión o enlace roto), la tarjeta muestra el monograma del barbero o la ilustración del producto; nunca queda un hueco ni un ícono roto.
 
 ## Variables de entorno
 

@@ -19,7 +19,7 @@ function Row({ branch, service }) {
         className="group grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-0.5 rounded-md px-4 py-3.5 transition-colors hover:bg-bone-100/[0.07]"
       >
         <span className="text-sm text-bone-100/65">{shortBranch(branch.name)}</span>
-        <span className="row-span-2 rounded-sm border border-brass-400/50 px-2.5 py-1 text-xs font-semibold text-brass-300 transition-colors group-hover:border-brass-300 group-hover:bg-brass-400 group-hover:text-cordovan-950">
+        <span className="row-span-2 rounded-sm border border-gold-400/50 px-2.5 py-1 text-xs font-semibold text-gold-300 transition-colors group-hover:border-gold-300 group-hover:bg-gold-400 group-hover:text-onyx-950">
           Tomarlo
         </span>
         {isPending ? (
@@ -40,7 +40,7 @@ function Row({ branch, service }) {
 /** Próximo turno libre por sede, en vivo desde la disponibilidad real */
 export function NextSlotPanel({ branches = [], service }) {
   return (
-    <div className="w-full max-w-sm rounded-lg border border-bone-100/12 bg-cordovan-950/70 p-2 backdrop-blur-md">
+    <div className="w-full max-w-sm rounded-lg border border-bone-100/12 bg-onyx-950/70 p-2 backdrop-blur-md">
       <div className="flex items-center justify-between px-4 pb-1 pt-3">
         <p className="text-sm font-semibold text-bone-50">Próximo turno libre</p>
         {service && <p className="text-xs text-bone-100/55">{service.name}</p>}

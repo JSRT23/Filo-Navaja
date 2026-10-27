@@ -225,7 +225,7 @@ export function CreateStaffModal({ open, onOpenChange, branches }) {
                       aria-label={c}
                       onClick={() => set('calendar_color', c)}
                       className="size-8 rounded-full ring-2 ring-offset-2 transition-shadow"
-                      style={{ background: c, '--tw-ring-color': f.calendar_color === c ? '#2b1416' : 'transparent' }}
+                      style={{ background: c, '--tw-ring-color': f.calendar_color === c ? '#0e0d0b' : 'transparent' }}
                     />
                   ))}
                 </div>
@@ -250,7 +250,7 @@ export function CreateStaffModal({ open, onOpenChange, branches }) {
                 </div>
                 <button
                   type="button"
-                  className="mt-2 text-sm font-medium text-cordovan-700 hover:underline"
+                  className="mt-2 text-sm font-medium text-gold-700 hover:underline"
                   onClick={() =>
                     set(
                       'service_ids',

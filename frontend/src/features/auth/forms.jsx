@@ -84,7 +84,7 @@ export function LoginForm({ onSuccess, defaultEmail = '' }) {
         {(p) => <PasswordInput {...p} autoComplete="current-password" {...register('password')} />}
       </Field>
       <div className="flex justify-end">
-        <Link to="/recuperar" className="text-sm font-medium text-cordovan-700 hover:underline">
+        <Link to="/recuperar" className="text-sm font-medium text-gold-700 hover:underline">
           ¿Olvidaste tu contraseña?
         </Link>
       </div>
@@ -160,7 +160,7 @@ export function RegisterForm({ onSuccess }) {
           label={
             <>
               Autorizo el tratamiento de mis datos personales según la{' '}
-              <Link to="/privacidad" target="_blank" className="font-medium text-cordovan-700 underline">
+              <Link to="/privacidad" target="_blank" className="font-medium text-gold-700 underline">
                 política de datos
               </Link>{' '}
               (Ley 1581 de 2012).

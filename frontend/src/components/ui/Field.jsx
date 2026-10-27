@@ -3,7 +3,7 @@ import { Check, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
 const control =
-  'w-full rounded-sm border border-line-strong bg-white px-3 text-[0.95rem] text-ink placeholder:text-ink-mute/80 transition-colors focus:border-cordovan-600 focus:outline-none focus:ring-3 focus:ring-brass-300/40 disabled:cursor-not-allowed disabled:bg-paper disabled:text-ink-mute aria-[invalid=true]:border-pole-500 aria-[invalid=true]:focus:ring-pole-100';
+  'w-full rounded-sm border border-line-strong bg-white px-3 text-[0.95rem] text-ink placeholder:text-ink-mute/80 transition-colors focus:border-onyx-600 focus:outline-none focus:ring-3 focus:ring-gold-300/40 disabled:cursor-not-allowed disabled:bg-paper disabled:text-ink-mute aria-[invalid=true]:border-pole-500 aria-[invalid=true]:focus:ring-pole-100';
 
 export function Label({ htmlFor, children, optional, className }) {
   return (
@@ -85,7 +85,7 @@ export const Checkbox = forwardRef(function Checkbox({ className, label, descrip
           ref={ref}
           id={id}
           type="checkbox"
-          className="peer size-5 cursor-pointer appearance-none rounded-xs border border-line-strong bg-white transition-colors checked:border-cordovan-800 checked:bg-cordovan-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass-500"
+          className="peer size-5 cursor-pointer appearance-none rounded-xs border border-line-strong bg-white transition-colors checked:border-onyx-800 checked:bg-onyx-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
           {...props}
         />
         <Check
@@ -145,7 +145,7 @@ export function Segmented({ value, onChange, options, className, size = 'md', to
       aria-label={ariaLabel}
       className={cn(
         'inline-flex max-w-full overflow-x-auto rounded-md border p-0.5 scrollbar-none',
-        dark ? 'border-bone-100/15 bg-cordovan-950/60' : 'border-line bg-paper',
+        dark ? 'border-bone-100/15 bg-onyx-950/60' : 'border-line bg-paper',
         className,
       )}
     >
@@ -163,7 +163,7 @@ export function Segmented({ value, onChange, options, className, size = 'md', to
               size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3.5 py-1.5 text-sm',
               active
                 ? dark
-                  ? 'bg-bone-50 text-cordovan-950'
+                  ? 'bg-bone-50 text-onyx-950'
                   : 'bg-white text-ink shadow-card'
                 : dark
                   ? 'text-bone-100/70 hover:text-bone-50'

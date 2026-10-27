@@ -45,9 +45,7 @@ export default function Barbers() {
                   onClick={() => setSpecialty(specialty === s ? null : s)}
                   className={cn(
                     'rounded-full px-3.5 py-1.5 text-sm font-medium ring-1 ring-inset transition-colors',
-                    specialty === s
-                      ? 'bg-cordovan-900 text-bone-50 ring-cordovan-900'
-                      : 'bg-white text-ink-soft ring-line hover:ring-line-strong',
+                    specialty === s ? 'bg-onyx-900 text-bone-50 ring-onyx-900' : 'bg-white text-ink-soft ring-line hover:ring-line-strong',
                   )}
                 >
                   {s}

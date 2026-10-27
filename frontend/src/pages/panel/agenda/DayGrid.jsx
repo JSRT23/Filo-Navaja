@@ -30,7 +30,7 @@ const fmtMin = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m
 const STATUS_STYLE = {
   pending: 'bg-amber-50 ring-amber-600/25',
   confirmed: 'bg-white ring-line-strong',
-  in_progress: 'bg-brass-300/35 ring-brass-500/50',
+  in_progress: 'bg-gold-300/35 ring-gold-500/50',
   completed: 'bg-paper ring-line text-ink-soft',
   no_show: 'bg-pole-50 ring-pole-100 text-pole-600',
   cancelled: 'bg-paper/70 ring-line text-ink-mute line-through opacity-70',
@@ -154,7 +154,7 @@ export function DayGrid({ date, barbers, appointments, branchHours = [], onOpen,
               {blocks.map(([s, e]) => (
                 <div
                   key={`${s}-${e}`}
-                  className="pointer-events-none absolute inset-x-0 bg-[repeating-linear-gradient(135deg,rgba(43,20,22,0.045)_0,rgba(43,20,22,0.045)_6px,transparent_6px,transparent_12px)]"
+                  className="pointer-events-none absolute inset-x-0 bg-[repeating-linear-gradient(135deg,rgba(14,13,11,0.045)_0,rgba(14,13,11,0.045)_6px,transparent_6px,transparent_12px)]"
                   style={{ top: (s - start) * PX, height: (e - s) * PX }}
                 />
               ))}

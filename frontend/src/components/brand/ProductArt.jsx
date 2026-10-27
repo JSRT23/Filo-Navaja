@@ -2,11 +2,11 @@ import { cn } from '@/lib/cn';
 
 // Ilustraciones de la línea de la casa. Se usan cuando el producto no tiene foto.
 const PALETTES = [
-  { body: '#2b1416', label: '#ede5d8', ink: '#2b1416', lid: '#b8925a' },
-  { body: '#2f5d50', label: '#f8f4ee', ink: '#1b3830', lid: '#1e0e10' },
-  { body: '#b8925a', label: '#2b1416', ink: '#ede5d8', lid: '#2b1416' },
-  { body: '#6c787e', label: '#f8f4ee', ink: '#2b1416', lid: '#b8925a' },
-  { body: '#ede5d8', label: '#2b1416', ink: '#ede5d8', lid: '#b8925a' },
+  { body: '#0e0d0b', label: '#ede5d8', ink: '#0e0d0b', lid: '#c49a48' },
+  { body: '#2f5d50', label: '#f8f4ee', ink: '#1b3830', lid: '#070706' },
+  { body: '#c49a48', label: '#0e0d0b', ink: '#ede5d8', lid: '#0e0d0b' },
+  { body: '#6c787e', label: '#f8f4ee', ink: '#0e0d0b', lid: '#c49a48' },
+  { body: '#ede5d8', label: '#0e0d0b', ink: '#ede5d8', lid: '#c49a48' },
 ];
 
 function kindOf(name = '') {
@@ -31,7 +31,7 @@ export function ProductArt({ name, className, background = '#efe8dc' }) {
   return (
     <svg viewBox="0 0 200 200" className={cn('h-full w-full', className)} role="img" aria-label={name}>
       <rect width="200" height="200" fill={background} />
-      <ellipse cx="100" cy="172" rx="62" ry="7" fill="#2b1416" opacity=".12" />
+      <ellipse cx="100" cy="172" rx="62" ry="7" fill="#0e0d0b" opacity=".12" />
       {kind === 'jar' && (
         <g>
           <rect x="52" y="78" width="96" height="92" rx="10" fill={p.body} />
@@ -74,7 +74,7 @@ export function ProductArt({ name, className, background = '#efe8dc' }) {
       )}
       {kind === 'dropper' && (
         <g>
-          <ellipse cx="100" cy="36" rx="9" ry="10" fill="#1e0e10" />
+          <ellipse cx="100" cy="36" rx="9" ry="10" fill="#070706" />
           <rect x="88" y="44" width="24" height="22" rx="3" fill={p.lid} />
           <path d="M74 86a14 14 0 0 1 14-14h24a14 14 0 0 1 14 14v74a10 10 0 0 1-10 10H84a10 10 0 0 1-10-10z" fill={p.body} />
           <rect x="82" y="102" width="36" height="46" rx="3" fill={p.label} />
@@ -93,7 +93,7 @@ export function ProductArt({ name, className, background = '#efe8dc' }) {
           {Array.from({ length: 22 }).map((_, i) => (
             <rect key={i} x={40 + i * 5.6} y="104" width="3" height={i < 9 ? 34 : 26} rx="1.2" fill="#8a5a32" />
           ))}
-          <rect x="44" y="90" width="40" height="8" rx="2" fill="#2b1416" opacity=".25" />
+          <rect x="44" y="90" width="40" height="8" rx="2" fill="#0e0d0b" opacity=".25" />
         </g>
       )}
     </svg>

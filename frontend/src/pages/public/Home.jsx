@@ -22,9 +22,9 @@ const ease = [0.22, 1, 0.36, 1];
 function Hero({ branches, services }) {
   const service = services.find((s) => s.slug === 'corte-clasico') ?? services[0];
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-cordovan-950 text-bone-50">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-onyx-950 text-bone-50">
       <motion.div
-        className="absolute inset-0 -z-10 lg:left-[30%]"
+        className="absolute inset-0 -z-10 lg:left-[30%] lg:[mask-image:linear-gradient(to_right,transparent,#000_35%)]"
         initial={{ opacity: 0, scale: 1.04 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.4, ease }}
@@ -33,21 +33,31 @@ function Hero({ branches, services }) {
       </motion.div>
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-cordovan-950 via-cordovan-950/55 to-cordovan-950/30 lg:bg-gradient-to-r lg:from-cordovan-950 lg:via-cordovan-950/80 lg:to-cordovan-950/10"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-onyx-950 via-onyx-950/55 to-onyx-950/30 lg:bg-gradient-to-r lg:from-onyx-950 lg:via-onyx-950/80 lg:to-onyx-950/10"
       />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-cordovan-950 to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-onyx-950 to-transparent" />
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-5 pb-12 pt-28 sm:px-8 sm:pb-16 lg:pb-20">
         <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
           <div>
             <h1 className="display text-[clamp(5.4rem,27vw,15.5rem)] text-bone-50">
               <span className="block overflow-hidden pb-[0.04em]">
-                <motion.span className="block" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 0.9, ease, delay: 0.15 }}>
+                <motion.span
+                  className="gold-metal block"
+                  initial={{ y: '105%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.9, ease, delay: 0.15 }}
+                >
                   Filo &amp;
                 </motion.span>
               </span>
               <span className="-mb-[0.12em] block overflow-hidden pb-[0.18em]">
-                <motion.span className="block" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 0.9, ease, delay: 0.27 }}>
+                <motion.span
+                  className="gold-metal block"
+                  initial={{ y: '105%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.9, ease, delay: 0.27 }}
+                >
                   Navaja
                 </motion.span>
               </span>
@@ -75,6 +85,7 @@ function Hero({ branches, services }) {
           </motion.div>
         </div>
       </div>
+      <div aria-hidden className="pole-stripes h-1.5" />
     </section>
   );
 }
@@ -83,7 +94,7 @@ function SectionHeading({ title, children, action, className, tone = 'light' }) 
   return (
     <div className={cn('mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between', className)}>
       <div className="max-w-2xl">
-        <h2 className={cn('display text-[clamp(3rem,7vw,5.5rem)]', tone === 'dark' ? 'text-bone-50' : 'text-cordovan-900')}>{title}</h2>
+        <h2 className={cn('display text-[clamp(3rem,7vw,5.5rem)]', tone === 'dark' ? 'text-bone-50' : 'text-onyx-900')}>{title}</h2>
         {children && (
           <p className={cn('mt-4 text-lg leading-relaxed', tone === 'dark' ? 'text-bone-100/70' : 'text-ink-soft')}>{children}</p>
         )}
@@ -105,9 +116,7 @@ function House({ branches, barbers, services }) {
           <SmartImage photo="room" className="col-span-2 aspect-square rounded-lg" sizes="(min-width: 1024px) 20vw, 40vw" />
         </div>
         <div className="flex flex-col justify-center">
-          <h2 className="display text-[clamp(3rem,6.5vw,5.25rem)] text-cordovan-900">
-            Toalla caliente, navaja recta y tiempo para conversar.
-          </h2>
+          <h2 className="display text-[clamp(3rem,6.5vw,5.25rem)] text-onyx-900">Toalla caliente, navaja recta y tiempo para conversar.</h2>
           <div className="mt-6 max-w-xl space-y-4 text-lg leading-relaxed text-ink-soft">
             <p>
               Somos {barbers.length ? number(barbers.length) : 'nueve'} barberos repartidos en {branches.length || 'dos'} sedes de Montería.
@@ -120,7 +129,7 @@ function House({ branches, barbers, services }) {
           </div>
 
           {hours.length > 0 && (
-            <div className="mt-10 max-w-md rounded-lg bg-cordovan-900 p-6 text-bone-50 shadow-ticket">
+            <div className="mt-10 max-w-md rounded-lg bg-onyx-900 p-6 text-bone-50 shadow-ticket">
               <p className="semi-condensed text-lg font-bold">Horario de las dos sedes</p>
               <dl className="mt-4 space-y-2">
                 {groupHours(hours).map((g) => (
@@ -147,7 +156,7 @@ function Team({ barbers, branches, services }) {
   const shown = barbers.filter((b) => branchFilter === 'all' || b.branch_id === branchFilter);
 
   return (
-    <section className="bg-cordovan-900 py-24 text-bone-50 sm:py-32">
+    <section className="bg-onyx-900 py-24 text-bone-50 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           tone="dark"
@@ -177,7 +186,7 @@ function Team({ barbers, branches, services }) {
               ))}
         </div>
         <div className="mt-10">
-          <Link to="/barberos" className="font-semibold text-brass-300 underline-offset-4 hover:underline">
+          <Link to="/barberos" className="font-semibold text-gold-300 underline-offset-4 hover:underline">
             Conoce a los {barbers.length || ''} barberos
           </Link>
         </div>
@@ -210,7 +219,7 @@ function HowToBook({ settings }) {
           <ol className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
             {steps.map(([title, text], i) => (
               <li key={title} className="flex gap-5">
-                <span className="display text-6xl text-brass-500">{i + 1}</span>
+                <span className="display text-6xl text-gold-500">{i + 1}</span>
                 <div className="pt-1.5">
                   <p className="text-lg font-semibold text-ink">{title}</p>
                   <p className="mt-1 text-ink-soft">{text}</p>
@@ -322,9 +331,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-cordovan-950 py-24 text-bone-50 sm:py-28">
+      <section className="relative overflow-hidden bg-onyx-950 py-24 text-bone-50 sm:py-28">
         <SmartImage photo="cut" className="absolute inset-0 opacity-30" imgClassName="grayscale" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-cordovan-950 via-cordovan-950/85 to-cordovan-950/40" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-onyx-950 via-onyx-950/85 to-onyx-950/40" />
         <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 sm:px-8 md:flex-row md:items-end md:justify-between">
           <h2 className="display max-w-3xl text-[clamp(3.5rem,9vw,7.5rem)]">¿Ya toca motilarse?</h2>
           <Button to="/reservar" size="lg" className="self-start md:self-auto">

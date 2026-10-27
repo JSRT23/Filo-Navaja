@@ -44,10 +44,10 @@ export function DateStrip({ available = [], loading, value, onChange, days = 21 
               className={cn(
                 'flex w-[4.4rem] shrink-0 snap-start flex-col items-center rounded-md border px-2 py-2.5 transition-colors',
                 active
-                  ? 'border-cordovan-900 bg-cordovan-900 text-bone-50'
+                  ? 'border-onyx-900 bg-onyx-900 text-bone-50'
                   : disabled
                     ? 'cursor-not-allowed border-transparent bg-paper text-ink-mute/60'
-                    : 'border-line bg-white text-ink hover:border-cordovan-600',
+                    : 'border-line bg-white text-ink hover:border-onyx-600',
                 loading && 'animate-pulse',
               )}
             >

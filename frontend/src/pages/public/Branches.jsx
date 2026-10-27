@@ -53,20 +53,20 @@ export default function Branches() {
                   )}
                 </div>
                 <div>
-                  <h2 id={`sede-${b.slug}`} className="display text-[clamp(3.5rem,8vw,6rem)] text-cordovan-900">
+                  <h2 id={`sede-${b.slug}`} className="display text-[clamp(3.5rem,8vw,6rem)] text-onyx-900">
                     {shortBranch(b.name)}
                   </h2>
                   <OpenStatus hours={b.branch_hours} className="mt-2" />
                   <ul className="mt-6 space-y-3 text-ink-soft">
                     <li className="flex gap-3">
-                      <MapPin className="mt-0.5 size-5 shrink-0 text-brass-600" aria-hidden />
+                      <MapPin className="mt-0.5 size-5 shrink-0 text-gold-600" aria-hidden />
                       <span>
                         {b.address}, barrio {b.neighborhood}. {b.city}
                       </span>
                     </li>
                     {b.phone && (
                       <li className="flex gap-3">
-                        <Phone className="mt-0.5 size-5 shrink-0 text-brass-600" aria-hidden />
+                        <Phone className="mt-0.5 size-5 shrink-0 text-gold-600" aria-hidden />
                         <a href={telLink(b.phone)} className="hover:text-ink">
                           {b.phone}
                         </a>
@@ -74,7 +74,7 @@ export default function Branches() {
                     )}
                     {b.whatsapp && (
                       <li className="flex gap-3">
-                        <WhatsAppGlyph className="mt-0.5 size-5 shrink-0 text-brass-600" />
+                        <WhatsAppGlyph className="mt-0.5 size-5 shrink-0 text-gold-600" />
                         <a href={whatsappLink(b.whatsapp)} target="_blank" rel="noreferrer" className="hover:text-ink">
                           {phone(b.whatsapp)}
                         </a>
@@ -82,7 +82,7 @@ export default function Branches() {
                     )}
                     {b.email && (
                       <li className="flex gap-3">
-                        <Mail className="mt-0.5 size-5 shrink-0 text-brass-600" aria-hidden />
+                        <Mail className="mt-0.5 size-5 shrink-0 text-gold-600" aria-hidden />
                         <a href={`mailto:${b.email}`} className="hover:text-ink">
                           {b.email}
                         </a>

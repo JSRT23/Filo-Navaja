@@ -4,16 +4,16 @@ import { Logo } from '@/components/brand/Logo';
 import { InstagramGlyph, WhatsAppGlyph } from '@/components/brand/Glyphs';
 import { useBranches } from '@/api/catalog';
 import { BRAND } from '@/lib/constants';
-import { PHOTOS } from '@/lib/images';
+import { CATALOG_PHOTO_AUTHORS, PHOTOS } from '@/lib/images';
 import { phone, telLink, whatsappLink } from '@/lib/format';
 
 export function PublicFooter() {
   const { data: branches = [] } = useBranches();
-  const authors = [...new Set(Object.values(PHOTOS).map((p) => p.author))];
+  const authors = [...new Set([...Object.values(PHOTOS).map((p) => p.author), ...CATALOG_PHOTO_AUTHORS])];
 
   return (
-    <footer className="relative bg-cordovan-950 text-bone-100/75">
-      <div aria-hidden className="pole-stripes h-1.5 opacity-80" />
+    <footer className="relative bg-onyx-950 text-bone-100/75">
+      <div aria-hidden className="pole-stripes h-1.5" />
       <div className="mx-auto grid max-w-7xl gap-12 px-5 pb-10 pt-16 sm:px-8 lg:grid-cols-[1.3fr_1fr_1fr_0.8fr]">
         <div className="max-w-sm">
           <Logo />
@@ -25,7 +25,7 @@ export function PublicFooter() {
               href={`https://instagram.com/${BRAND.instagram}`}
               target="_blank"
               rel="noreferrer"
-              className="grid size-10 place-items-center rounded-full border border-bone-100/15 text-bone-100 transition-colors hover:border-brass-400 hover:text-brass-300"
+              className="grid size-10 place-items-center rounded-full border border-bone-100/15 text-bone-100 transition-colors hover:border-gold-400 hover:text-gold-300"
               aria-label="Instagram de Filo & Navaja"
             >
               <InstagramGlyph />
@@ -35,7 +35,7 @@ export function PublicFooter() {
                 href={whatsappLink(branches[0].whatsapp, 'Hola, quiero información sobre un turno')}
                 target="_blank"
                 rel="noreferrer"
-                className="grid size-10 place-items-center rounded-full border border-bone-100/15 text-bone-100 transition-colors hover:border-brass-400 hover:text-brass-300"
+                className="grid size-10 place-items-center rounded-full border border-bone-100/15 text-bone-100 transition-colors hover:border-gold-400 hover:text-gold-300"
                 aria-label="Escribir por WhatsApp"
               >
                 <WhatsAppGlyph />
@@ -43,7 +43,7 @@ export function PublicFooter() {
             )}
             <a
               href={`mailto:${BRAND.email}`}
-              className="grid size-10 place-items-center rounded-full border border-bone-100/15 text-bone-100 transition-colors hover:border-brass-400 hover:text-brass-300"
+              className="grid size-10 place-items-center rounded-full border border-bone-100/15 text-bone-100 transition-colors hover:border-gold-400 hover:text-gold-300"
               aria-label="Enviar un correo"
             >
               <Mail className="size-4.5" />
@@ -56,7 +56,7 @@ export function PublicFooter() {
             <h3 className="semi-condensed text-lg font-bold text-bone-50">{b.name.replace('Filo & Navaja ', '')}</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li className="flex gap-2.5">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-brass-400" aria-hidden />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-gold-400" aria-hidden />
                 <span>
                   {b.address}
                   <br />
@@ -65,7 +65,7 @@ export function PublicFooter() {
               </li>
               {b.phone && (
                 <li className="flex gap-2.5">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-brass-400" aria-hidden />
+                  <Phone className="mt-0.5 size-4 shrink-0 text-gold-400" aria-hidden />
                   <a href={telLink(b.phone)} className="hover:text-bone-50">
                     {b.phone}
                   </a>
@@ -73,7 +73,7 @@ export function PublicFooter() {
               )}
               {b.whatsapp && (
                 <li className="flex gap-2.5">
-                  <WhatsAppGlyph className="mt-0.5 size-4 shrink-0 text-brass-400" />
+                  <WhatsAppGlyph className="mt-0.5 size-4 shrink-0 text-gold-400" />
                   <a href={whatsappLink(b.whatsapp)} target="_blank" rel="noreferrer" className="hover:text-bone-50">
                     {phone(b.whatsapp)}
                   </a>
@@ -110,7 +110,7 @@ export function PublicFooter() {
             © {new Date().getFullYear()} Filo &amp; Navaja. Proyecto académico de Electiva Específica IV, Universidad Cooperativa de
             Colombia.
           </p>
-          <p>Fotografías de {authors.join(', ')} en Unsplash.</p>
+          <p className="max-w-2xl">Fotografías ilustrativas de {authors.join(', ')} en Unsplash, con su licencia libre.</p>
         </div>
       </div>
     </footer>

@@ -85,6 +85,22 @@ insert into public.barbers (id, profile_id, branch_id, display_name, bio, specia
   ('ba000000-0000-4000-8000-000000000009', 'a2000000-0000-4000-8000-000000000009', 'b1000000-0000-4000-8000-000000000002', 'Brayan Castro',
    'Diseños a navaja y colorimetría.', '{Freestyle,Tinte}', '#B4A7D6', 4, '2024-02-12');
 
+-- Fotos ilustrativas de los barberos demo (Licencia Unsplash, uso libre).
+-- Cada barbero puede subir la suya desde Panel › Mi perfil.
+update public.barbers b set photo_url = v.url
+from (values
+  ('ba000000-0000-4000-8000-000000000001'::uuid, 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=75'),  -- Carlos Díaz
+  ('ba000000-0000-4000-8000-000000000002'::uuid, 'https://images.unsplash.com/photo-1770253980732-dfed1cfdfa43?auto=format&fit=crop&w=900&q=75'),  -- Jhon Mercado
+  ('ba000000-0000-4000-8000-000000000003'::uuid, 'https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?auto=format&fit=crop&w=900&q=75'),  -- Kevin Pacheco
+  ('ba000000-0000-4000-8000-000000000004'::uuid, 'https://images.unsplash.com/photo-1599011176306-4a96f1516d4d?auto=format&fit=crop&w=900&q=75'),  -- Luis Ortega
+  ('ba000000-0000-4000-8000-000000000005'::uuid, 'https://images.unsplash.com/photo-1657105052497-f996284ffff8?auto=format&fit=crop&w=900&q=75'),  -- Sebastián Doria
+  ('ba000000-0000-4000-8000-000000000006'::uuid, 'https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=75'),  -- Miguel Hoyos
+  ('ba000000-0000-4000-8000-000000000007'::uuid, 'https://images.unsplash.com/photo-1635273051937-a0ddef9573b6?auto=format&fit=crop&w=900&q=75'),  -- Yeison Martínez
+  ('ba000000-0000-4000-8000-000000000008'::uuid, 'https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?auto=format&fit=crop&w=900&q=75'),  -- Daniel Lora
+  ('ba000000-0000-4000-8000-000000000009'::uuid, 'https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&fit=crop&w=900&q=75')  -- Brayan Castro
+) as v(id, url)
+where b.id = v.id and b.photo_url is null;
+
 -- Cada barbero presta todos los servicios salvo excepciones
 insert into public.barber_services (barber_id, service_id)
 select b.id, s.id from public.barbers b cross join public.services s

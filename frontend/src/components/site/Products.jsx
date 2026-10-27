@@ -3,6 +3,8 @@ import { cn } from '@/lib/cn';
 import { money } from '@/lib/format';
 import { ProductArt } from '@/components/brand/ProductArt';
 import { Modal } from '@/components/ui/Modal';
+import { Img } from '@/components/ui/Img';
+import { sized } from '@/lib/images';
 
 /** Disponibilidad por sede a partir de product_stock */
 export function availability(product, branches = []) {
@@ -24,22 +26,19 @@ function availabilityLabel(product, branches) {
 export function ProductCard({ product, branches, onOpen, className }) {
   const av = availabilityLabel(product, branches);
   return (
-    <button type="button" onClick={() => onOpen?.(product)} className={cn('group block w-full text-left', className)}>
-      <span className="block aspect-square overflow-hidden rounded-lg bg-bone-100">
-        {product.image ? (
-          <img
-            src={product.image}
-            alt=""
-            loading="lazy"
-            className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-          />
-        ) : (
-          <span className="block size-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-            <ProductArt name={product.name} />
-          </span>
-        )}
+    <button type="button" onClick={() => onOpen?.(product)} className={cn('group block w-full self-start text-left', className)}>
+      <span className="relative block aspect-square overflow-hidden rounded-lg bg-bone-100">
+        <Img
+          src={sized(product.image, 640)}
+          className="transition-[transform,opacity] duration-700 ease-out group-hover:scale-[1.03]"
+          fallback={
+            <span className="block size-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
+              <ProductArt name={product.name} />
+            </span>
+          }
+        />
       </span>
-      <span className="mt-3 flex items-baseline justify-between gap-3">
+      <span className="mt-3 flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
         <span className="font-semibold text-ink">{product.name}</span>
         <span className="tabular whitespace-nowrap font-semibold">{money(product.price)}</span>
       </span>
@@ -60,14 +59,14 @@ export function ProductModal({ product, branches, open, onOpenChange }) {
   return (
     <Modal open={open} onOpenChange={onOpenChange} size="lg">
       <div className="grid gap-6 pt-2 sm:grid-cols-2">
-        <div className="aspect-square overflow-hidden rounded-lg bg-bone-100">
-          {product.image ? <img src={product.image} alt="" className="size-full object-cover" /> : <ProductArt name={product.name} />}
+        <div className="relative aspect-square overflow-hidden rounded-lg bg-bone-100">
+          <Img src={sized(product.image, 900)} eager fallback={<ProductArt name={product.name} />} />
         </div>
         <div className="flex flex-col">
-          <p className="text-sm text-ink-mute">
+          <p className="text-sm text-ink-mute sm:pr-10">
             {product.brand === 'Filo & Navaja' ? 'Línea de la casa' : `Marca ${product.brand}`}, {product.category?.name?.toLowerCase()}
           </p>
-          <h2 className="display mt-1 text-5xl text-cordovan-900">{product.name}</h2>
+          <h2 className="display mt-1 text-5xl text-onyx-900 sm:pr-10">{product.name}</h2>
           <p className="tabular mt-3 text-2xl font-semibold">{money(product.price)}</p>
           {product.description && <p className="mt-4 leading-relaxed text-ink-soft">{product.description}</p>}
           <h3 className="mt-6 text-sm font-semibold">Disponibilidad</h3>

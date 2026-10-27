@@ -58,7 +58,7 @@ export function BranchCard({ branch, className }) {
       />
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h3 className="display text-5xl text-cordovan-900">{shortBranch(branch.name)}</h3>
+          <h3 className="display text-5xl text-onyx-900">{shortBranch(branch.name)}</h3>
           <OpenStatus hours={branch.branch_hours} />
         </div>
         <p className="mt-2 text-ink-soft">

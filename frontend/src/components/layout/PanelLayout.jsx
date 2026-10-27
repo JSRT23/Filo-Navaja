@@ -85,7 +85,7 @@ function SidebarContent({ onNavigate }) {
   const groups = navFor(role);
 
   return (
-    <div className="flex h-full flex-col bg-cordovan-950 text-bone-100">
+    <div className="flex h-full flex-col bg-onyx-950 text-bone-100">
       <div className="px-5 pb-4 pt-5">
         <Logo to="/panel" />
       </div>
@@ -97,7 +97,7 @@ function SidebarContent({ onNavigate }) {
             <select
               value={branchId ?? ''}
               onChange={(e) => setBranchId(e.target.value)}
-              className="h-10 w-full cursor-pointer appearance-none rounded-md border border-bone-100/12 bg-cordovan-900 px-3 text-sm font-medium text-bone-50 focus:border-brass-400 focus:outline-none"
+              className="h-10 w-full cursor-pointer appearance-none rounded-md border border-bone-100/12 bg-onyx-900 px-3 text-sm font-medium text-bone-50 focus:border-gold-400 focus:outline-none"
             >
               {branches.map((b) => (
                 <option key={b.id} value={b.id}>
@@ -107,7 +107,7 @@ function SidebarContent({ onNavigate }) {
             </select>
           </label>
         ) : (
-          <p className="rounded-md border border-bone-100/10 bg-cordovan-900 px-3 py-2 text-sm font-medium text-bone-50">
+          <p className="rounded-md border border-bone-100/10 bg-onyx-900 px-3 py-2 text-sm font-medium text-bone-50">
             Sede {shortBranch(branches.find((b) => b.id === branchId)?.name ?? '')}
           </p>
         )}
@@ -128,7 +128,7 @@ function SidebarContent({ onNavigate }) {
                       cn(
                         'flex items-center gap-3 rounded-md px-3 py-2 text-[0.92rem] font-medium transition-colors',
                         isActive && !item.external
-                          ? 'bg-bone-50 text-cordovan-900'
+                          ? 'bg-bone-50 text-onyx-900'
                           : 'text-bone-100/75 hover:bg-bone-100/[0.07] hover:text-bone-50',
                       )
                     }
@@ -238,7 +238,7 @@ export default function PanelLayout() {
           side="left"
           title="Menú"
           width="max-w-xs"
-          className="bg-cordovan-950 [&>div:first-child]:hidden"
+          className="bg-onyx-950 [&>div:first-child]:hidden"
         >
           <SidebarContent onNavigate={() => setMobileOpen(false)} />
         </Drawer>

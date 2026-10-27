@@ -26,7 +26,7 @@ export default function Services() {
       <section className="bg-bone-50 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           {error ? <ErrorState error={error} onRetry={refetch} /> : <ServiceMenu services={services} loading={isPending} columns={2} />}
-          <div className="mt-20 grid gap-6 border-t border-cordovan-900/15 pt-10 text-ink-soft md:grid-cols-3">
+          <div className="mt-20 grid gap-6 border-t border-onyx-900/15 pt-10 text-ink-soft md:grid-cols-3">
             <p>
               <span className="block font-semibold text-ink">Pago en la sede</span>
               Efectivo, tarjeta, transferencia, Nequi o Daviplata.

@@ -17,15 +17,12 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="display text-6xl text-cordovan-900">Ingresa</h1>
+      <h1 className="display text-6xl text-onyx-900">Ingresa</h1>
       <p className="mb-8 mt-3 text-ink-soft">Consulta tus citas, reprograma o reserva de nuevo.</p>
       <LoginForm />
       <p className="mt-8 text-center text-sm text-ink-soft">
         ¿Primera vez en Filo &amp; Navaja?{' '}
-        <Link
-          to={`/registro${next ? `?next=${encodeURIComponent(next)}` : ''}`}
-          className="font-semibold text-cordovan-700 hover:underline"
-        >
+        <Link to={`/registro${next ? `?next=${encodeURIComponent(next)}` : ''}`} className="font-semibold text-gold-700 hover:underline">
           Crea tu cuenta
         </Link>
       </p>

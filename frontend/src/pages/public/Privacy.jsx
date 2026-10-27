@@ -63,11 +63,11 @@ export default function Privacy() {
           <div className="space-y-12">
             {SECTIONS.map((s) => (
               <section key={s.title}>
-                <h2 className="semi-condensed text-2xl font-bold text-cordovan-900">{s.title}</h2>
+                <h2 className="semi-condensed text-2xl font-bold text-onyx-900">{s.title}</h2>
                 <ul className="mt-4 space-y-3 text-[1.05rem] leading-relaxed text-ink-soft">
                   {s.body.map((p) => (
                     <li key={p} className="flex gap-3">
-                      <span aria-hidden className="mt-[0.7em] h-px w-3 shrink-0 bg-brass-500" />
+                      <span aria-hidden className="mt-[0.7em] h-px w-3 shrink-0 bg-gold-500" />
                       <span>{p}</span>
                     </li>
                   ))}

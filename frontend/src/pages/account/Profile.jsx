@@ -29,7 +29,7 @@ const passwordSchema = z
 function Card({ title, description, children, className }) {
   return (
     <section className={`rounded-xl bg-white p-6 ring-1 ring-line sm:p-7 ${className ?? ''}`}>
-      <h2 className="semi-condensed text-xl font-bold text-cordovan-900">{title}</h2>
+      <h2 className="semi-condensed text-xl font-bold text-onyx-900">{title}</h2>
       {description && <p className="mt-1 text-sm text-ink-soft">{description}</p>}
       <div className="mt-5">{children}</div>
     </section>
@@ -68,7 +68,7 @@ function AvatarUploader() {
       <div className="relative">
         <Avatar name={profile?.full_name} src={publicUrl('avatars', profile?.avatar_url)} size="xl" />
         {busy && (
-          <span className="absolute inset-0 grid place-items-center rounded-full bg-cordovan-950/50 text-bone-50">
+          <span className="absolute inset-0 grid place-items-center rounded-full bg-onyx-950/50 text-bone-50">
             <Spinner />
           </span>
         )}
@@ -144,7 +144,7 @@ export default function Profile() {
 
   return (
     <div className="bg-bone-50">
-      <div className="bg-cordovan-900 pb-10 pt-28 text-bone-50 sm:pt-32">
+      <div className="bg-onyx-900 pb-10 pt-28 text-bone-50 sm:pt-32">
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
           <h1 className="display text-[clamp(3.25rem,8vw,5.5rem)]">Mi perfil</h1>
           <div className="mt-8">

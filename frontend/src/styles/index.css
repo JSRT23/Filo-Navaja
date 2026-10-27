@@ -3,29 +3,30 @@
 
 /* ---------------------------------------------------------------------
    Filo & Navaja · tokens de diseño
-   Cordobán (cuero de las sillas), hueso (toallas), latón (herrajes),
-   acero (navaja), verde Sinú (el río de Montería) y rojo del poste.
+   Negro ónix (barra de navegación, encabezados y pie), hueso (toallas),
+   dorado (herrajes), acero (navaja), verde Sinú (el río de Montería)
+   y las franjas rojo, blanco y azul del poste de barbero.
    --------------------------------------------------------------------- */
 @theme {
   --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  --color-cordovan-950: #1e0e10;
-  --color-cordovan-900: #2b1416;
-  --color-cordovan-800: #3a1c1f;
-  --color-cordovan-700: #4b272a;
-  --color-cordovan-600: #6b3a3e;
-  --color-cordovan-500: #8c5257;
+  --color-onyx-950: #070706;
+  --color-onyx-900: #0e0d0b;
+  --color-onyx-800: #1b1a17;
+  --color-onyx-700: #2b2925;
+  --color-onyx-600: #4a463f;
+  --color-onyx-500: #6e685e;
 
   --color-bone-50: #f8f4ee;
   --color-bone-100: #ede5d8;
   --color-bone-200: #e2d7c5;
   --color-bone-300: #cfc0a8;
 
-  --color-brass-300: #dcc092;
-  --color-brass-400: #c9a46c;
-  --color-brass-500: #b8925a;
-  --color-brass-600: #96743f;
-  --color-brass-700: #75592f;
+  --color-gold-300: #e3c88e;
+  --color-gold-400: #d4b067;
+  --color-gold-500: #c49a48;
+  --color-gold-600: #9b7630;
+  --color-gold-700: #775a22;
 
   --color-steel-300: #c3cacd;
   --color-steel-400: #a9b3b8;
@@ -43,6 +44,9 @@
   --color-pole-500: #b23a3a;
   --color-pole-600: #922d2e;
 
+  --color-pole-red: #c8102e;
+  --color-pole-blue: #1d4f91;
+
   --color-amber-50: #fbf2e1;
   --color-amber-600: #8f5c0c;
 
@@ -53,9 +57,9 @@
   --color-paper: #f6f4f1;
   --color-line: #e6e0d7;
   --color-line-strong: #d5ccbf;
-  --color-ink: #211a18;
-  --color-ink-soft: #5c524c;
-  --color-ink-mute: #71665e;
+  --color-ink: #1c1a17;
+  --color-ink-soft: #57524b;
+  --color-ink-mute: #6d675f;
 
   --radius-xs: 3px;
   --radius-sm: 6px;
@@ -63,9 +67,9 @@
   --radius-lg: 14px;
   --radius-xl: 20px;
 
-  --shadow-card: 0 1px 0 rgb(43 20 22 / 0.04), 0 1px 3px rgb(43 20 22 / 0.06);
-  --shadow-pop: 0 18px 50px -12px rgb(30 14 16 / 0.35), 0 4px 14px -4px rgb(30 14 16 / 0.18);
-  --shadow-ticket: 0 1px 0 rgb(43 20 22 / 0.05), 0 12px 30px -18px rgb(43 20 22 / 0.4);
+  --shadow-card: 0 1px 0 rgb(14 13 11 / 0.04), 0 1px 3px rgb(14 13 11 / 0.06);
+  --shadow-pop: 0 18px 50px -12px rgb(7 7 6 / 0.35), 0 4px 14px -4px rgb(7 7 6 / 0.18);
+  --shadow-ticket: 0 1px 0 rgb(14 13 11 / 0.05), 0 12px 30px -18px rgb(14 13 11 / 0.4);
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -92,6 +96,13 @@
   font-weight: 820;
   line-height: 0.86;
   letter-spacing: -0.012em;
+}
+/* Dorado metálico para el nombre de la marca en la portada */
+@utility gold-metal {
+  background-image: linear-gradient(180deg, #f6e7b9 0%, #e2c27a 38%, #c9a24a 62%, #9c7a2f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 @utility tabular {
   font-variant-numeric: tabular-nums;
@@ -128,13 +139,13 @@
     line-height: 1.55;
   }
   :focus-visible {
-    outline: 2px solid var(--color-brass-500);
+    outline: 2px solid var(--color-gold-500);
     outline-offset: 2px;
     border-radius: 4px;
   }
   ::selection {
-    background: var(--color-brass-300);
-    color: var(--color-cordovan-950);
+    background: var(--color-gold-300);
+    color: var(--color-onyx-950);
   }
   h1,
   h2,
@@ -164,18 +175,18 @@
     opacity: 0.35;
     transform: translateY(-0.32em);
   }
-  /* Rayas del poste de barbero (detalle de marca, se usa poco) */
+  /* Franjas del poste de barbero: rojo, blanco y azul */
   .pole-stripes {
     background-image: repeating-linear-gradient(
       -45deg,
-      var(--color-pole-500) 0 8px,
-      var(--color-bone-100) 8px 16px,
-      var(--color-cordovan-900) 16px 24px,
-      var(--color-bone-100) 24px 32px
+      var(--color-pole-red) 0 8px,
+      #ffffff 8px 16px,
+      var(--color-pole-blue) 16px 24px,
+      #ffffff 24px 32px
     );
   }
   .skeleton {
-    background: linear-gradient(90deg, rgb(43 20 22 / 0.06) 25%, rgb(43 20 22 / 0.11) 37%, rgb(43 20 22 / 0.06) 63%);
+    background: linear-gradient(90deg, rgb(14 13 11 / 0.06) 25%, rgb(14 13 11 / 0.11) 37%, rgb(14 13 11 / 0.06) 63%);
     background-size: 400% 100%;
     animation: var(--animate-shimmer);
   }

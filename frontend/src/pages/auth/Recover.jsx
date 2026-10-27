@@ -32,7 +32,7 @@ export default function Recover() {
 
   return (
     <>
-      <h1 className="display text-6xl text-cordovan-900">Recupera tu acceso</h1>
+      <h1 className="display text-6xl text-onyx-900">Recupera tu acceso</h1>
       <p className="mb-8 mt-3 text-ink-soft">Te enviamos un enlace para crear una contraseña nueva.</p>
       {sentTo ? (
         <div className="rounded-lg border border-sinu-100 bg-sinu-50 p-6 text-center">
@@ -54,7 +54,7 @@ export default function Recover() {
         </form>
       )}
       <p className="mt-8 text-center text-sm">
-        <Link to="/ingresar" className="font-semibold text-cordovan-700 hover:underline">
+        <Link to="/ingresar" className="font-semibold text-gold-700 hover:underline">
           Volver a ingresar
         </Link>
       </p>

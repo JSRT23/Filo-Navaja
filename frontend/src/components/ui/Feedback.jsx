@@ -26,7 +26,7 @@ export function EmptyState({ icon: Icon, title, children, action, className }) {
   return (
     <div className={cn('flex flex-col items-center justify-center px-6 py-12 text-center', className)}>
       {Icon && (
-        <div className="mb-4 grid size-12 place-items-center rounded-full bg-cordovan-900/5 text-cordovan-600">
+        <div className="mb-4 grid size-12 place-items-center rounded-full bg-onyx-900/5 text-onyx-600">
           <Icon className="size-5" aria-hidden />
         </div>
       )}
@@ -49,7 +49,7 @@ export function ErrorState({ error, onRetry, className, title = 'No pudimos carg
         <button
           type="button"
           onClick={onRetry}
-          className="mt-4 inline-flex items-center gap-2 rounded-sm px-3 py-1.5 text-sm font-semibold text-cordovan-700 hover:bg-cordovan-900/5"
+          className="mt-4 inline-flex items-center gap-2 rounded-sm px-3 py-1.5 text-sm font-semibold text-gold-700 hover:bg-onyx-900/5"
         >
           <RefreshCw className="size-4" aria-hidden /> Reintentar
         </button>

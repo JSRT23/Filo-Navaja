@@ -34,7 +34,7 @@ export function StepConfirm({ branch, service, slot, notes, onNotes, onConfirm, 
   return (
     <div>
       <div className="mb-6">
-        <h2 className="display text-5xl text-cordovan-900 sm:text-6xl">Revisa y confirma</h2>
+        <h2 className="display text-5xl text-onyx-900 sm:text-6xl">Revisa y confirma</h2>
         <p className="mt-2 text-ink-soft">Puedes cancelar o reprogramar desde tu cuenta hasta {cancelHours} horas antes.</p>
       </div>
 
@@ -89,7 +89,7 @@ export function StepConfirm({ branch, service, slot, notes, onNotes, onConfirm, 
               label={
                 <>
                   Autorizo el tratamiento de mis datos según la{' '}
-                  <Link to="/privacidad" target="_blank" className="font-medium text-cordovan-700 underline">
+                  <Link to="/privacidad" target="_blank" className="font-medium text-gold-700 underline">
                     política de datos
                   </Link>
                   .
@@ -145,7 +145,7 @@ export function BookingSuccess({ booking, onAnother }) {
         </motion.svg>
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.5 }}>
-        <h2 className="display mt-6 text-6xl text-cordovan-900">
+        <h2 className="display mt-6 text-6xl text-onyx-900">
           Turno reservado{profile?.full_name ? `, ${firstName(profile.full_name)}` : ''}
         </h2>
         <p className="mt-3 text-lg text-ink-soft">
@@ -164,7 +164,7 @@ export function BookingSuccess({ booking, onAnother }) {
         <button
           type="button"
           onClick={onAnother}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-cordovan-700 hover:underline"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-gold-700 hover:underline"
         >
           <Check className="size-4" aria-hidden /> Reservar otro turno
         </button>

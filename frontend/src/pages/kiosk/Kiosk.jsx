@@ -11,6 +11,8 @@ import { errorMessage } from '@/lib/errors';
 import { cn } from '@/lib/cn';
 import { nowInBogota } from '@/lib/hours';
 import { publicUrl } from '@/lib/supabase';
+import { sized } from '@/lib/images';
+import { Img } from '@/components/ui/Img';
 import { Logo } from '@/components/brand/Logo';
 import { PageLoader, ErrorState } from '@/components/ui/Feedback';
 import { shortBranch } from '@/components/site/Branches';
@@ -87,7 +89,7 @@ function PinPad({ barber, onClose, onDone }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 grid place-items-center bg-cordovan-950/85 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 grid place-items-center bg-onyx-950/85 p-4 backdrop-blur-sm"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -96,7 +98,7 @@ function PinPad({ barber, onClose, onDone }) {
         role="dialog"
         aria-modal="true"
         aria-label={`PIN de ${barber.display_name}`}
-        className="w-full max-w-sm rounded-xl bg-cordovan-900 p-7 text-center text-bone-50 shadow-pop ring-1 ring-bone-100/10"
+        className="w-full max-w-sm rounded-xl bg-onyx-900 p-7 text-center text-bone-50 shadow-pop ring-1 ring-bone-100/10"
         initial={{ y: 24, scale: 0.97 }}
         animate={{ y: 0, scale: 1 }}
         exit={{ y: 12, opacity: 0 }}
@@ -117,7 +119,7 @@ function PinPad({ barber, onClose, onDone }) {
               key={i}
               className={cn(
                 'size-4 rounded-full ring-2 transition-colors',
-                i < pin.length ? 'bg-brass-400 ring-brass-400' : 'ring-bone-100/30',
+                i < pin.length ? 'bg-gold-400 ring-gold-400' : 'ring-bone-100/30',
               )}
             />
           ))}
@@ -136,7 +138,7 @@ function PinPad({ barber, onClose, onDone }) {
               aria-label={k === 'del' ? 'Borrar' : k === 'ok' ? 'Registrar' : k}
               className={cn(
                 'condensed grid h-16 place-items-center rounded-md text-3xl font-bold transition-colors active:scale-95 disabled:opacity-50',
-                k === 'ok' ? 'bg-brass-500 text-cordovan-950 hover:bg-brass-400' : 'bg-cordovan-800 hover:bg-cordovan-700',
+                k === 'ok' ? 'bg-gold-500 text-onyx-950 hover:bg-gold-400' : 'bg-onyx-800 hover:bg-onyx-700',
               )}
             >
               {k === 'del' ? (
@@ -167,7 +169,7 @@ function SuccessOverlay({ result, onClose }) {
     <motion.button
       type="button"
       onClick={onClose}
-      className={cn('fixed inset-0 z-50 grid place-items-center p-6 text-center', isIn ? 'bg-sinu-600' : 'bg-cordovan-800')}
+      className={cn('fixed inset-0 z-50 grid place-items-center p-6 text-center', isIn ? 'bg-sinu-600' : 'bg-onyx-800')}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -223,7 +225,7 @@ export default function Kiosk() {
   }, []);
 
   return (
-    <div className="flex min-h-dvh flex-col bg-cordovan-950 text-bone-50">
+    <div className="flex min-h-dvh flex-col bg-onyx-950 text-bone-50">
       <header className="flex flex-wrap items-center justify-between gap-4 px-6 py-5 sm:px-10">
         <div className="flex items-center gap-4">
           <Link
@@ -247,7 +249,7 @@ export default function Kiosk() {
                   /* sin almacenamiento */
                 }
               }}
-              className="h-10 rounded-md border border-bone-100/15 bg-cordovan-900 px-3 text-sm"
+              className="h-10 rounded-md border border-bone-100/15 bg-onyx-900 px-3 text-sm"
               aria-label="Sede del kiosco"
             >
               {branches.map((b) => (
@@ -294,16 +296,17 @@ export default function Kiosk() {
                   type="button"
                   disabled={!b.has_pin}
                   onClick={() => setSelected(b)}
-                  className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-xl bg-cordovan-900 p-5 text-left ring-1 ring-bone-100/10 transition-transform active:scale-[0.98] disabled:opacity-50"
+                  className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-xl bg-onyx-900 p-5 text-left ring-1 ring-bone-100/10 transition-transform active:scale-[0.98] disabled:opacity-50"
                 >
-                  {b.photo_url ? (
-                    <img src={publicUrl('barbers', b.photo_url)} alt="" className="absolute inset-0 size-full object-cover opacity-80" />
-                  ) : (
-                    <span aria-hidden className="display absolute -right-2 top-2 text-[8.5rem] text-brass-400/15">
-                      {initials(b.display_name)}
-                    </span>
-                  )}
-                  <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-cordovan-950 via-cordovan-950/30 to-transparent" />
+                  <Img
+                    src={sized(publicUrl('barbers', b.photo_url), 600)}
+                    fallback={
+                      <span aria-hidden className="display absolute -right-2 top-2 text-[8.5rem] text-gold-400/15">
+                        {initials(b.display_name)}
+                      </span>
+                    }
+                  />
+                  <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-onyx-950 via-onyx-950/30 to-transparent" />
                   <span className="relative">
                     <span className="display block text-4xl">{b.display_name}</span>
                     <span
@@ -311,7 +314,7 @@ export default function Kiosk() {
                         'mt-2 inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs font-medium',
                         s.tone === 'in' && 'bg-sinu-500 text-white',
                         s.tone === 'out' && 'bg-bone-100/15 text-bone-100',
-                        s.tone === 'pending' && 'bg-brass-500/20 text-brass-300',
+                        s.tone === 'pending' && 'bg-gold-500/20 text-gold-300',
                         s.tone === 'off' && 'bg-bone-100/10 text-bone-100/60',
                       )}
                     >

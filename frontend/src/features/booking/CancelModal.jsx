@@ -66,7 +66,7 @@ export function CancelModal({ appointment, open, onOpenChange, onDone, staff = f
             onClick={() => setReason(reason === r ? '' : r)}
             className={cn(
               'rounded-full px-3 py-1.5 text-sm ring-1 ring-inset transition-colors',
-              reason === r ? 'bg-cordovan-900 text-bone-50 ring-cordovan-900' : 'bg-white text-ink-soft ring-line hover:ring-line-strong',
+              reason === r ? 'bg-onyx-900 text-bone-50 ring-onyx-900' : 'bg-white text-ink-soft ring-line hover:ring-line-strong',
             )}
           >
             {r}

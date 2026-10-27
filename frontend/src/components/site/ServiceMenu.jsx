@@ -38,21 +38,18 @@ export function ServiceMenu({ services, loading, categories, limitPerCategory, c
         <section key={category.id ?? category.name} aria-labelledby={`cat-${category.slug}`}>
           <h3
             id={`cat-${category.slug}`}
-            className={cn(
-              'display border-b pb-3 text-4xl',
-              dark ? 'border-bone-100/15 text-bone-50' : 'border-cordovan-900/15 text-cordovan-900',
-            )}
+            className={cn('display border-b pb-3 text-4xl', dark ? 'border-bone-100/15 text-bone-50' : 'border-onyx-900/15 text-onyx-900')}
           >
             {category.name}
           </h3>
           <ul>
             {(limitPerCategory ? items.slice(0, limitPerCategory) : items).map((s) => (
-              <li key={s.id} className={cn('border-b', dark ? 'border-bone-100/8' : 'border-cordovan-900/8')}>
+              <li key={s.id} className={cn('border-b', dark ? 'border-bone-100/8' : 'border-onyx-900/8')}>
                 <Link
                   to={`/reservar?servicio=${s.slug}`}
                   className={cn(
                     'group -mx-3 block rounded-sm px-3 py-3.5 transition-colors',
-                    dark ? 'hover:bg-bone-100/5' : 'hover:bg-cordovan-900/[0.035]',
+                    dark ? 'hover:bg-bone-100/5' : 'hover:bg-onyx-900/[0.035]',
                   )}
                 >
                   <div className={cn('flex items-baseline gap-3', dark ? 'text-bone-50' : 'text-ink')}>
@@ -68,7 +65,7 @@ export function ServiceMenu({ services, loading, categories, limitPerCategory, c
                     </span>
                   </div>
                   {s.is_featured && (
-                    <span className={cn('mt-2 inline-block text-xs font-semibold', dark ? 'text-brass-300' : 'text-brass-700')}>
+                    <span className={cn('mt-2 inline-block text-xs font-semibold', dark ? 'text-gold-300' : 'text-gold-700')}>
                       De los más pedidos
                     </span>
                   )}

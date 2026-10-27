@@ -119,7 +119,7 @@ export default function MyBarberProfile() {
                 color={barber.calendar_color}
               />
               {uploading && (
-                <span className="absolute inset-0 grid place-items-center rounded-md bg-cordovan-950/50 text-bone-50">
+                <span className="absolute inset-0 grid place-items-center rounded-md bg-onyx-950/50 text-bone-50">
                   <Spinner />
                 </span>
               )}

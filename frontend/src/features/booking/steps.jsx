@@ -3,6 +3,7 @@ import { Check, Clock, MapPin, Shuffle, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { duration, firstName, initials, longDate, money, time } from '@/lib/format';
 import { BRANCH_PHOTO } from '@/lib/images';
+import { publicUrl } from '@/lib/supabase';
 import { groupByCategory } from '@/api/catalog';
 import { useAvailableDates, useBranchAvailability } from '@/api/booking';
 import { SmartImage } from '@/components/SmartImage';
@@ -15,7 +16,7 @@ import { DateStrip, SlotGrid } from './SlotPicker';
 function StepTitle({ children, hint }) {
   return (
     <div className="mb-6">
-      <h2 className="display text-5xl text-cordovan-900 sm:text-6xl">{children}</h2>
+      <h2 className="display text-5xl text-onyx-900 sm:text-6xl">{children}</h2>
       {hint && <p className="mt-2 text-ink-soft">{hint}</p>}
     </div>
   );
@@ -51,13 +52,13 @@ export function StepBranch({ branches, value, onSelect }) {
               onClick={() => onSelect(b.id)}
               className={cn(
                 'group overflow-hidden rounded-lg bg-white text-left ring-1 transition-shadow',
-                active ? 'ring-2 ring-cordovan-900' : 'ring-line hover:ring-line-strong',
+                active ? 'ring-2 ring-onyx-900' : 'ring-line hover:ring-line-strong',
               )}
             >
               <SmartImage photo={BRANCH_PHOTO[b.slug] ?? 'shop'} className="aspect-[16/8]" sizes="(min-width: 640px) 30vw, 100vw" />
               <div className="flex items-start justify-between gap-3 p-5">
                 <div>
-                  <p className="display text-4xl text-cordovan-900">{shortBranch(b.name)}</p>
+                  <p className="display text-4xl text-onyx-900">{shortBranch(b.name)}</p>
                   <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-soft">
                     <MapPin className="size-3.5" aria-hidden /> {b.address}
                   </p>
@@ -106,7 +107,7 @@ export function StepService({ services, value, onSelect }) {
                       <span className="flex flex-wrap items-center gap-x-2 font-semibold text-ink">
                         {s.name}
                         {s.is_featured && (
-                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-brass-700">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-gold-700">
                             <Sparkles className="size-3" aria-hidden /> De los más pedidos
                           </span>
                         )}
@@ -147,7 +148,7 @@ export function StepBarber({ barbers, value, onSelect }) {
               onClick={() => onSelect(b.id)}
               className={cn(
                 'flex items-center gap-4 rounded-lg bg-white p-4 text-left ring-1 transition-shadow',
-                active ? 'ring-2 ring-cordovan-900' : 'ring-line hover:ring-line-strong',
+                active ? 'ring-2 ring-onyx-900' : 'ring-line hover:ring-line-strong',
               )}
             >
               {b.any ? (
@@ -218,7 +219,13 @@ export function StepTime({ branchId, serviceId, barberId, date, slot, onDate, on
               loading={availability.isPending && Boolean(date)}
               value={slot?.start}
               onChange={(s) =>
-                onSlot({ start: s.slot_start, end: s.slot_end, barberId: s.barber_id, barberName: s.barber_name, barberPhoto: s.photo_url })
+                onSlot({
+                  start: s.slot_start,
+                  end: s.slot_end,
+                  barberId: s.barber_id,
+                  barberName: s.barber_name,
+                  barberPhoto: publicUrl('barbers', s.photo_url),
+                })
               }
             />
           )}
@@ -234,11 +241,7 @@ export function StepTime({ branchId, serviceId, barberId, date, slot, onDate, on
                 {time(slot.start)} con {firstName(slot.barberName)}
               </p>
               {alternatives.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => setShowAll((v) => !v)}
-                  className="text-sm font-medium text-cordovan-700 hover:underline"
-                >
+                <button type="button" onClick={() => setShowAll((v) => !v)} className="text-sm font-medium text-gold-700 hover:underline">
                   {showAll ? 'Ocultar' : `Prefiero otro barbero a esa hora (${alternatives.length - 1} más)`}
                 </button>
               )}
@@ -253,15 +256,15 @@ export function StepTime({ branchId, serviceId, barberId, date, slot, onDate, on
                 <button
                   key={a.barber_id}
                   type="button"
-                  onClick={() => onSlot({ ...slot, barberId: a.barber_id, barberName: a.barber_name, barberPhoto: a.photo_url })}
+                  onClick={() =>
+                    onSlot({ ...slot, barberId: a.barber_id, barberName: a.barber_name, barberPhoto: publicUrl('barbers', a.photo_url) })
+                  }
                   className={cn(
                     'inline-flex items-center gap-2 rounded-full py-1 pl-1 pr-3 text-sm ring-1 transition-colors',
-                    a.barber_id === slot.barberId
-                      ? 'bg-cordovan-900 text-bone-50 ring-cordovan-900'
-                      : 'bg-white ring-line hover:ring-line-strong',
+                    a.barber_id === slot.barberId ? 'bg-onyx-900 text-bone-50 ring-onyx-900' : 'bg-white ring-line hover:ring-line-strong',
                   )}
                 >
-                  <span className="grid size-7 place-items-center rounded-full bg-cordovan-800 text-[0.65rem] font-bold text-brass-300">
+                  <span className="grid size-7 place-items-center rounded-full bg-onyx-800 text-[0.65rem] font-bold text-gold-300">
                     {initials(a.barber_name)}
                   </span>
                   {a.barber_name}

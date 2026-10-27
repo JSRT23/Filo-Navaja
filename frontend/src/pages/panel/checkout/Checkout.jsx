@@ -70,7 +70,7 @@ function Catalog({ services, products, onAdd }) {
                     : { type: 'product', id: x.id, description: x.name, unit_price: x.price, stock: x.quantity },
                 )
               }
-              className="flex min-h-20 flex-col justify-between rounded-md bg-paper p-3 text-left ring-1 ring-line transition-colors hover:bg-white hover:ring-cordovan-600 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex min-h-20 flex-col justify-between rounded-md bg-paper p-3 text-left ring-1 ring-line transition-colors hover:bg-white hover:ring-onyx-600 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <span className="text-sm font-medium leading-snug">{x.name}</span>
               <span className="mt-2 flex items-end justify-between gap-2">
@@ -101,7 +101,7 @@ function PendingStrip({ pending, onPick, activeId }) {
             onClick={() => onPick(a)}
             className={cn(
               'w-52 shrink-0 rounded-md p-3 text-left ring-1 transition-colors',
-              activeId === a.id ? 'bg-cordovan-900 text-bone-50 ring-cordovan-900' : 'bg-paper ring-line hover:ring-cordovan-600',
+              activeId === a.id ? 'bg-onyx-900 text-bone-50 ring-onyx-900' : 'bg-paper ring-line hover:ring-onyx-600',
             )}
           >
             <span className="flex items-center justify-between gap-2">
@@ -481,7 +481,7 @@ export default function Checkout() {
                           className={cn(
                             'flex flex-col items-center gap-1 rounded-md px-2 py-2.5 text-xs font-medium ring-1 transition-colors',
                             payment === k
-                              ? 'bg-cordovan-900 text-bone-50 ring-cordovan-900'
+                              ? 'bg-onyx-900 text-bone-50 ring-onyx-900'
                               : 'bg-white text-ink-soft ring-line hover:ring-line-strong',
                           )}
                         >

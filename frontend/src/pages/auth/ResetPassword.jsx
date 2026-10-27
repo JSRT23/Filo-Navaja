@@ -41,7 +41,7 @@ export default function ResetPassword() {
 
   return (
     <>
-      <h1 className="display text-6xl text-cordovan-900">Contraseña nueva</h1>
+      <h1 className="display text-6xl text-onyx-900">Contraseña nueva</h1>
       {!user ? (
         <div className="mt-6 space-y-4">
           <InlineAlert tone="amber">El enlace venció o ya se usó. Solicita uno nuevo para cambiar tu contraseña.</InlineAlert>
@@ -64,7 +64,7 @@ export default function ResetPassword() {
         </form>
       )}
       <p className="mt-8 text-center text-sm">
-        <Link to="/" className="font-semibold text-cordovan-700 hover:underline">
+        <Link to="/" className="font-semibold text-gold-700 hover:underline">
           Ir al inicio
         </Link>
       </p>

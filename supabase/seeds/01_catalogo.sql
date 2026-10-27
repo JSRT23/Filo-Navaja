@@ -74,3 +74,20 @@ insert into public.products (id, category_id, sku, name, brand, description, pri
   ('9d000000-0000-4000-8000-000000000008', 'ca000000-0000-4000-8000-000000000003', 'FN-MIN-060', 'Minoxidil cosmético 5 % 60 ml', 'Genérico',  'Uso cosmético para barba y cabello.', 65000, 34000, 6),
   ('9d000000-0000-4000-8000-000000000009', 'ca000000-0000-4000-8000-000000000004', 'FN-AFT-100', 'Loción aftershave 100 ml',  'Filo & Navaja', 'Calma la piel después del afeitado.', 36000, 15000, 3),
   ('9d000000-0000-4000-8000-000000000010', 'ca000000-0000-4000-8000-000000000004', 'FN-PEI-001', 'Peine de madera',           'Filo & Navaja', 'Peine antiestático de madera de sándalo.', 15000, 5000, 3);
+
+-- Fotos ilustrativas de los productos (Licencia Unsplash, uso libre).
+-- Se reemplazan por fotos propias desde Panel › Catálogo.
+update public.products p set image_url = v.url
+from (values
+  ('FN-POM-100', 'https://images.unsplash.com/photo-1631438406588-3a079c32b864?auto=format&fit=crop&w=900&q=75'),
+  ('FN-CER-100', 'https://images.unsplash.com/photo-1633793566102-ee7793834059?auto=format&fit=crop&w=900&q=75'),
+  ('FN-POL-020', 'https://images.unsplash.com/photo-1711563386439-75ce269ac998?auto=format&fit=crop&w=900&q=75'),
+  ('FN-ACE-030', 'https://images.unsplash.com/photo-1781344116880-029945a42b75?auto=format&fit=crop&w=900&q=75'),
+  ('FN-BAL-060', 'https://images.unsplash.com/photo-1633793566189-8e9fe6f817fc?auto=format&fit=crop&w=900&q=75'),
+  ('FN-SHB-120', 'https://images.unsplash.com/photo-1683383277379-644816d886e2?auto=format&fit=crop&w=900&q=75'),
+  ('FN-SHA-300', 'https://images.unsplash.com/photo-1694101395622-65100ea10a0c?auto=format&fit=crop&w=900&q=75'),
+  ('FN-MIN-060', 'https://images.unsplash.com/photo-1781346325200-61cef7b29d76?auto=format&fit=crop&w=900&q=75'),
+  ('FN-AFT-100', 'https://images.unsplash.com/photo-1705899844877-81bb0a0665c1?auto=format&fit=crop&w=900&q=75'),
+  ('FN-PEI-001', 'https://images.unsplash.com/photo-1634082983637-c1382c567945?auto=format&fit=crop&w=900&q=75')
+) as v(sku, url)
+where p.sku = v.sku and p.image_url is null;

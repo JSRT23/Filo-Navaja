@@ -6,7 +6,7 @@ export function PageHeader({ title, description, actions, children }) {
   return (
     <header className="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div className="min-w-0">
-        <h1 className="display text-5xl text-cordovan-900 sm:text-6xl">{title}</h1>
+        <h1 className="display text-5xl text-onyx-900 sm:text-6xl">{title}</h1>
         {description && <p className="mt-2 max-w-2xl text-ink-soft">{description}</p>}
         {children}
       </div>
@@ -36,14 +36,11 @@ export function Panel({ title, description, actions, children, className, bodyCl
 export function StatTile({ label, value, hint, icon: Icon, tone = 'default', loading }) {
   return (
     <div
-      className={cn(
-        'rounded-lg p-5 ring-1',
-        tone === 'dark' ? 'bg-cordovan-900 text-bone-50 ring-cordovan-900' : 'bg-white shadow-card ring-line',
-      )}
+      className={cn('rounded-lg p-5 ring-1', tone === 'dark' ? 'bg-onyx-900 text-bone-50 ring-onyx-900' : 'bg-white shadow-card ring-line')}
     >
       <div className="flex items-center justify-between gap-2">
         <p className={cn('text-sm', tone === 'dark' ? 'text-bone-100/70' : 'text-ink-soft')}>{label}</p>
-        {Icon && <Icon className={cn('size-4', tone === 'dark' ? 'text-brass-300' : 'text-ink-mute')} aria-hidden />}
+        {Icon && <Icon className={cn('size-4', tone === 'dark' ? 'text-gold-300' : 'text-ink-mute')} aria-hidden />}
       </div>
       {loading ? (
         <div className={cn('mt-3 h-9 w-28 rounded-sm', tone === 'dark' ? 'skeleton-dark' : 'skeleton')} />

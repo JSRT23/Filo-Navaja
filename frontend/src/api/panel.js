@@ -23,15 +23,17 @@ export function useRealtime(table, filter, keys, enabled = true) {
 }
 
 // ------------------------------------------------------------ Panel KPIs
-export function useDashboard({ from, to, branchId }) {
+export function useDashboard({ from, to, branchId }, { enabled = true } = {}) {
   return useQuery({
+    enabled,
     queryKey: ['dashboard', from, to, branchId ?? 'all'],
     queryFn: () => rpc('dashboard_summary', { p_from: from, p_to: to, p_branch_id: branchId ?? null }),
   });
 }
 
-export function useLowStock(branchId) {
+export function useLowStock(branchId, { enabled = true } = {}) {
   return useQuery({
+    enabled,
     queryKey: ['low-stock', branchId ?? 'all'],
     queryFn: async () => {
       let q = supabase.from('v_low_stock').select('*').order('missing', { ascending: false });

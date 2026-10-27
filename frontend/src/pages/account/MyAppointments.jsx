@@ -21,7 +21,7 @@ function UpcomingCard({ a, branch, windowMinutes, onReschedule, onCancel }) {
   const canChange = minutesLeft > windowMinutes;
   return (
     <article className="flex flex-col overflow-hidden rounded-xl bg-white shadow-ticket ring-1 ring-line sm:flex-row">
-      <div className="flex shrink-0 items-center gap-4 bg-cordovan-900 px-6 py-5 text-bone-50 sm:w-40 sm:flex-col sm:justify-center sm:gap-0 sm:text-center">
+      <div className="flex shrink-0 items-center gap-4 bg-onyx-900 px-6 py-5 text-bone-50 sm:w-40 sm:flex-col sm:justify-center sm:gap-0 sm:text-center">
         <span className="text-sm capitalize text-bone-100/70">{weekdayShort(a.starts_at)}</span>
         <span className="display text-6xl sm:mt-1">{Number(a.local_date.slice(8))}</span>
         <span className="text-sm capitalize text-bone-100/70">{monthShort(a.starts_at)}</span>
@@ -108,7 +108,7 @@ export default function MyAppointments() {
 
   return (
     <div className="bg-bone-50">
-      <div className="bg-cordovan-900 pb-10 pt-28 text-bone-50 sm:pt-32">
+      <div className="bg-onyx-900 pb-10 pt-28 text-bone-50 sm:pt-32">
         <div className="mx-auto flex max-w-5xl flex-col gap-6 px-5 sm:flex-row sm:items-end sm:justify-between sm:px-8">
           <div>
             <p className="text-bone-100/70">Hola, {firstName(profile?.full_name)}</p>
@@ -132,7 +132,7 @@ export default function MyAppointments() {
         ) : (
           <>
             <section aria-labelledby="proximas">
-              <h2 id="proximas" className="semi-condensed text-2xl font-bold text-cordovan-900">
+              <h2 id="proximas" className="semi-condensed text-2xl font-bold text-onyx-900">
                 Próximas
               </h2>
               {upcoming.length === 0 ? (
@@ -165,7 +165,7 @@ export default function MyAppointments() {
             </section>
 
             <section aria-labelledby="historial" className="mt-14">
-              <h2 id="historial" className="semi-condensed text-2xl font-bold text-cordovan-900">
+              <h2 id="historial" className="semi-condensed text-2xl font-bold text-onyx-900">
                 Historial
               </h2>
               {history.length === 0 ? (

@@ -32,7 +32,7 @@ function WeekDots({ schedules = [] }) {
             title={`${WEEKDAYS[d]}: ${on ? 'trabaja' : 'descansa'}`}
             className={cn(
               'grid size-6 place-items-center rounded-xs text-[0.65rem] font-semibold',
-              on ? 'bg-cordovan-900 text-bone-50' : 'bg-paper text-ink-mute',
+              on ? 'bg-onyx-900 text-bone-50' : 'bg-paper text-ink-mute',
             )}
           >
             {DAY_LETTER[d]}

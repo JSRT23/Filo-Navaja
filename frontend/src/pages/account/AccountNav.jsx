@@ -15,7 +15,7 @@ export function AccountNav() {
           className={({ isActive }) =>
             cn(
               'rounded-sm px-3.5 py-2 text-sm font-medium transition-colors',
-              isActive ? 'bg-bone-50 text-cordovan-900' : 'text-bone-100/75 hover:bg-bone-100/10 hover:text-bone-50',
+              isActive ? 'bg-bone-50 text-onyx-900' : 'text-bone-100/75 hover:bg-bone-100/10 hover:text-bone-50',
             )
           }
         >

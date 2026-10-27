@@ -27,7 +27,7 @@ export function ReceiptModal({ receipt, open, onOpenChange, branch }) {
     >
       <div className="print-area mx-auto max-w-xs rounded-md bg-paper px-5 py-6 font-mono text-[0.8rem] leading-relaxed text-ink">
         <div className="text-center font-sans">
-          <RazorMark className="mx-auto size-7 text-cordovan-800" />
+          <RazorMark className="mx-auto size-7 text-onyx-800" />
           <p className="display mt-1 text-2xl">Filo &amp; Navaja</p>
           <p className="text-xs text-ink-soft">{branch?.name}</p>
           <p className="text-xs text-ink-soft">{branch?.address}</p>

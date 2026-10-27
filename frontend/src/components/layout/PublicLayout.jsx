@@ -27,7 +27,7 @@ export function PublicLayout() {
 /** Encabezado oscuro de las páginas internas del sitio */
 export function PageHero({ title, children, aside }) {
   return (
-    <section className="relative overflow-hidden bg-cordovan-900 pb-14 pt-32 text-bone-50 sm:pb-16 sm:pt-36">
+    <section className="relative overflow-hidden bg-onyx-900 pb-14 pt-32 text-bone-50 sm:pb-16 sm:pt-36">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
           <h1 className="display text-[clamp(3.25rem,9vw,7rem)]">{title}</h1>

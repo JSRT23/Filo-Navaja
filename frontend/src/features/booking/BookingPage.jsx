@@ -60,10 +60,7 @@ function Stepper({ step, maxStep, onGo }) {
               className="group flex w-full flex-col gap-2 text-left disabled:cursor-default"
             >
               <span
-                className={cn(
-                  'h-1 w-full rounded-full transition-colors duration-500',
-                  done || current ? 'bg-brass-400' : 'bg-bone-100/15',
-                )}
+                className={cn('h-1 w-full rounded-full transition-colors duration-500', done || current ? 'bg-gold-400' : 'bg-bone-100/15')}
               />
               <span
                 className={cn(
@@ -100,7 +97,7 @@ function Summary({ branch, service, barber, draft, onGo }) {
   return (
     <aside className="rounded-xl bg-white shadow-ticket ring-1 ring-line lg:sticky lg:top-24">
       <div className="px-6 pb-3 pt-5">
-        <p className="semi-condensed text-xl font-bold text-cordovan-900">Tu turno</p>
+        <p className="semi-condensed text-xl font-bold text-onyx-900">Tu turno</p>
       </div>
       <dl className="px-6">
         {rows.map((r) => (
@@ -111,7 +108,7 @@ function Summary({ branch, service, barber, draft, onGo }) {
                 <button
                   type="button"
                   onClick={() => onGo(r.step)}
-                  className="font-semibold text-ink first-letter:uppercase hover:text-cordovan-700"
+                  className="font-semibold text-ink first-letter:uppercase hover:text-gold-700"
                 >
                   {r.value}
                   {r.extra && <span className="block text-xs font-normal text-ink-mute">{r.extra}</span>}
@@ -123,10 +120,10 @@ function Summary({ branch, service, barber, draft, onGo }) {
           </div>
         ))}
       </dl>
-      <div className="relative mt-2 flex items-baseline justify-between rounded-b-xl bg-cordovan-900 px-6 py-4 text-bone-50">
+      <div className="relative mt-2 flex items-baseline justify-between rounded-b-xl bg-onyx-900 px-6 py-4 text-bone-50">
         <span
           aria-hidden
-          className="absolute -top-2 left-0 right-0 h-4 bg-[radial-gradient(circle_at_8px_0,transparent_6px,#2b1416_6.5px)] bg-[length:16px_16px] bg-repeat-x"
+          className="absolute -top-2 left-0 right-0 h-4 bg-[radial-gradient(circle_at_8px_0,transparent_6px,#0e0d0b_6.5px)] bg-[length:16px_16px] bg-repeat-x"
         />
         <span className="text-sm text-bone-100/70">Total a pagar en la sede</span>
         <span className="tabular text-2xl font-bold">{service ? money(service.price) : '—'}</span>
@@ -257,7 +254,7 @@ export default function BookingPage() {
 
   return (
     <div className="min-h-screen bg-bone-50">
-      <div ref={topRef} className="scroll-mt-0 bg-cordovan-900 pb-8 pt-28 text-bone-50 sm:pt-32">
+      <div ref={topRef} className="scroll-mt-0 bg-onyx-900 pb-8 pt-28 text-bone-50 sm:pt-32">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <h1 className="display text-[clamp(3.25rem,8vw,5.5rem)]">Reserva tu turno</h1>
           {!done && (

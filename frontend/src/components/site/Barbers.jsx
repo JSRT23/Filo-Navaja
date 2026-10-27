@@ -6,6 +6,8 @@ import { WEEK_ORDER, WEEKDAYS } from '@/lib/constants';
 import { InstagramGlyph } from '@/components/brand/Glyphs';
 import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
+import { Img } from '@/components/ui/Img';
+import { sized } from '@/lib/images';
 
 export function BarberCard({ barber, branchName, onOpen, className }) {
   return (
@@ -13,27 +15,24 @@ export function BarberCard({ barber, branchName, onOpen, className }) {
       type="button"
       onClick={() => onOpen?.(barber)}
       className={cn(
-        'group relative block aspect-[4/5] w-full overflow-hidden rounded-lg bg-cordovan-800 text-left focus-visible:outline-offset-4',
+        'group relative block aspect-[4/5] w-full overflow-hidden rounded-lg bg-onyx-800 text-left focus-visible:outline-offset-4',
         className,
       )}
       aria-label={`Ver perfil de ${barber.display_name}`}
     >
-      {barber.photo ? (
-        <img
-          src={barber.photo}
-          alt=""
-          loading="lazy"
-          className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-        />
-      ) : (
-        <span
-          aria-hidden
-          className="display pointer-events-none absolute -right-3 top-2 select-none text-[10.5rem] leading-none text-brass-400/[0.16]"
-        >
-          {initials(barber.display_name)}
-        </span>
-      )}
-      <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-cordovan-950 via-cordovan-950/35 to-transparent" />
+      <Img
+        src={sized(barber.photo, 720)}
+        className="transition-[transform,opacity] duration-700 ease-out group-hover:scale-[1.03]"
+        fallback={
+          <span
+            aria-hidden
+            className="display pointer-events-none absolute -right-3 top-2 select-none text-[10.5rem] leading-none text-gold-400/[0.16]"
+          >
+            {initials(barber.display_name)}
+          </span>
+        }
+      />
+      <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-onyx-950 via-onyx-950/35 to-transparent" />
       <span className="absolute inset-x-0 bottom-0 p-5">
         {branchName && <span className="block text-sm text-bone-100/65">{branchName}</span>}
         <span className="display mt-1 block text-[2.6rem] text-bone-50">{barber.display_name}</span>
@@ -57,13 +56,13 @@ export function BarberModal({ barber, branch, services = [], open, onOpenChange 
 
   return (
     <Modal open={open} onOpenChange={onOpenChange} size="lg" hideClose={false}>
-      <div className="-mx-6 -mt-4 mb-6 flex items-end gap-5 bg-cordovan-900 px-6 pb-6 pt-10 text-bone-50">
-        <span className="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-lg bg-cordovan-800">
-          {barber.photo ? (
-            <img src={barber.photo} alt="" className="size-full object-cover" />
-          ) : (
-            <span className="display text-5xl text-brass-400">{initials(barber.display_name)}</span>
-          )}
+      <div className="-mx-6 -mt-4 mb-6 flex items-end gap-5 bg-onyx-900 px-6 pb-6 pt-10 text-bone-50">
+        <span className="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-lg bg-onyx-800">
+          <Img
+            src={sized(barber.photo, 240)}
+            eager
+            fallback={<span className="display text-5xl text-gold-400">{initials(barber.display_name)}</span>}
+          />
         </span>
         <div className="min-w-0 pb-1">
           <p className="text-sm text-bone-100/65">Sede {branch?.name?.replace('Filo & Navaja ', '')}</p>
@@ -86,7 +85,7 @@ export function BarberModal({ barber, branch, services = [], open, onOpenChange 
               href={`https://instagram.com/${barber.instagram.replace('@', '')}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-cordovan-700 hover:underline"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gold-700 hover:underline"
             >
               <InstagramGlyph className="size-4" /> @{barber.instagram.replace('@', '')}
             </a>

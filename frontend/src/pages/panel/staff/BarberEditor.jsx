@@ -352,7 +352,7 @@ export function BarberEditor({ barber, branches, onClose }) {
               <div className="mb-3 flex gap-3 text-sm">
                 <button
                   type="button"
-                  className="font-medium text-cordovan-700 hover:underline"
+                  className="font-medium text-gold-700 hover:underline"
                   onClick={() => setServiceIds(services.map((s) => s.id))}
                 >
                   Marcar todos

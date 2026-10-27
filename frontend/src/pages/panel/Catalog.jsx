@@ -14,6 +14,8 @@ import { Button, IconButton } from '@/components/ui/Button';
 import { Field, Input, Segmented, Select, Switch, Textarea } from '@/components/ui/Field';
 import { ErrorState, PageLoader, Spinner } from '@/components/ui/Feedback';
 import { Modal } from '@/components/ui/Modal';
+import { Img } from '@/components/ui/Img';
+import { sized } from '@/lib/images';
 
 const DURATIONS = [10, 15, 20, 30, 40, 45, 60, 75, 90, 120];
 
@@ -23,8 +25,8 @@ function ImageField({ value, onChange, folder, fallbackName }) {
   const url = publicUrl('catalog', value);
   return (
     <div className="flex items-center gap-4">
-      <div className="size-20 shrink-0 overflow-hidden rounded-md bg-bone-100 ring-1 ring-line">
-        {url ? <img src={url} alt="" className="size-full object-cover" /> : <ProductArt name={fallbackName || 'Producto'} />}
+      <div className="relative size-20 shrink-0 overflow-hidden rounded-md bg-bone-100 ring-1 ring-line">
+        <Img src={sized(url, 200)} eager fallback={<ProductArt name={fallbackName || 'Producto'} />} />
       </div>
       <div>
         <Button variant="outline" size="sm" disabled={busy} onClick={() => input.current?.click()}>
@@ -424,7 +426,7 @@ export default function Catalog() {
                       onClick={() => saveService.mutate({ id: s.id, is_featured: !s.is_featured })}
                       className={cn(
                         'grid size-8 place-items-center rounded-sm hover:bg-paper',
-                        s.is_featured ? 'text-brass-600' : 'text-line-strong',
+                        s.is_featured ? 'text-gold-600' : 'text-line-strong',
                       )}
                     >
                       <Star className="size-4" fill={s.is_featured ? 'currentColor' : 'none'} />

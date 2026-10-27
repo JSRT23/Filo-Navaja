@@ -50,3 +50,45 @@ export function photoSrcSet(key, widths = [640, 960, 1280, 1920]) {
 
 /** Foto de portada por sede */
 export const BRANCH_PHOTO = { 'la-castellana': 'shop', centro: 'chair' };
+
+/**
+ * Ajusta el tamaño de una foto de Unsplash según dónde se muestra.
+ * Las fotos subidas a Supabase Storage se devuelven sin cambios.
+ */
+export function sized(url, width = 800, quality = 72) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname !== 'images.unsplash.com') return url;
+    parsed.searchParams.set('auto', 'format');
+    parsed.searchParams.set('fit', 'crop');
+    parsed.searchParams.set('w', String(width));
+    parsed.searchParams.set('q', String(quality));
+    return parsed.toString();
+  } catch {
+    return url;
+  }
+}
+
+/**
+ * Autores de las fotos ilustrativas de barberos y productos guardadas en la base
+ * (Licencia Unsplash). Se reemplazan por fotos propias desde el panel.
+ */
+export const CATALOG_PHOTO_AUTHORS = [
+  'Agustin Fernandez',
+  'Siednji Leon',
+  'Hai Phung',
+  'Mr Shave',
+  'Gulom Nazarov',
+  'Nathon Oski',
+  'Salah Regouane',
+  'Michael DeMoya',
+  'Nate Johnston',
+  'pmv chamara',
+  'Point Normal',
+  'Avtar Singh',
+  'Shajith Joseph',
+  'Mockup Free',
+  'Content Pixie',
+  'Raghavendra V. Konkathi',
+];

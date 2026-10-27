@@ -26,7 +26,7 @@ function RevenueTooltip({ active, payload }) {
   if (!active || !payload?.length) return null;
   const p = payload[0].payload;
   return (
-    <div className="rounded-md bg-cordovan-950 px-3 py-2 text-sm text-bone-50 shadow-pop">
+    <div className="rounded-md bg-onyx-950 px-3 py-2 text-sm text-bone-50 shadow-pop">
       <p className="text-bone-100/70">{dayMonth(p.day)}</p>
       <p className="tabular font-semibold">{money(p.revenue)}</p>
       <p className="text-xs text-bone-100/60">{p.sales} ventas</p>
@@ -56,7 +56,7 @@ function RevenueChart({ data }) {
             tick={{ fontSize: 12, fill: '#71665e' }}
             width={72}
           />
-          <Tooltip content={<RevenueTooltip />} cursor={{ fill: 'rgba(43,20,22,0.05)' }} />
+          <Tooltip content={<RevenueTooltip />} cursor={{ fill: 'rgba(14,13,11,0.05)' }} />
           <Bar dataKey="revenue" fill="var(--color-chart)" radius={[4, 4, 0, 0]} maxBarSize={24} />
         </BarChart>
       </ResponsiveContainer>
@@ -101,7 +101,7 @@ function TodayList({ branchId }) {
       title="Lo que sigue hoy"
       padded={false}
       actions={
-        <Link to="/panel/agenda" className="inline-flex items-center gap-1 text-sm font-medium text-cordovan-700 hover:underline">
+        <Link to="/panel/agenda" className="inline-flex items-center gap-1 text-sm font-medium text-gold-700 hover:underline">
           Agenda <ArrowUpRight className="size-3.5" aria-hidden />
         </Link>
       }
@@ -137,18 +137,19 @@ function TodayList({ branchId }) {
 
 export default function PanelHome() {
   usePageTitle('Resumen');
-  const { role, profile, isAdmin } = useAuth();
+  const { profile, isAdmin, isFrontDesk: canSee } = useAuth();
   const { branchId, branches } = usePanel();
   const [preset, setPreset] = useState('month');
   const [scope, setScope] = useState('all');
   const range = rangeFor(preset);
   const branchFilter = isAdmin ? (scope === 'all' ? null : scope) : branchId;
-  const { data, isPending, error, refetch } = useDashboard({ ...range, branchId: branchFilter });
-  const lowStock = useLowStock(branchFilter);
+  // El barbero no ve el resumen general: se le lleva a su agenda sin consultar nada
+  const { data, isPending, error, refetch } = useDashboard({ ...range, branchId: branchFilter }, { enabled: canSee });
+  const lowStock = useLowStock(branchFilter, { enabled: canSee });
 
   const daily = useMemo(() => (data?.daily_revenue ?? []).map((d) => ({ ...d, revenue: Number(d.revenue) })), [data]);
 
-  if (role === 'barber') return <Navigate to="/panel/agenda" replace />;
+  if (!canSee) return <Navigate to="/panel/agenda" replace />;
 
   const rev = data?.revenue;
   const ap = data?.appointments;
@@ -265,10 +266,7 @@ export default function PanelHome() {
               title="Inventario por reponer"
               padded={false}
               actions={
-                <Link
-                  to="/panel/inventario"
-                  className="inline-flex items-center gap-1 text-sm font-medium text-cordovan-700 hover:underline"
-                >
+                <Link to="/panel/inventario" className="inline-flex items-center gap-1 text-sm font-medium text-gold-700 hover:underline">
                   Inventario <ArrowUpRight className="size-3.5" aria-hidden />
                 </Link>
               }

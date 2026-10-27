@@ -4,10 +4,10 @@ import { cn } from '@/lib/cn';
 import { Spinner } from './Feedback';
 
 const VARIANTS = {
-  primary: 'bg-brass-500 text-cordovan-950 hover:bg-brass-400 active:bg-brass-600 shadow-[inset_0_-1px_0_rgb(0_0_0/0.12)]',
-  dark: 'bg-cordovan-900 text-bone-50 hover:bg-cordovan-800 active:bg-cordovan-950',
-  outline: 'border border-line-strong bg-white text-ink hover:border-cordovan-600 hover:bg-bone-50',
-  ghost: 'text-ink-soft hover:bg-cordovan-900/5 hover:text-ink',
+  primary: 'bg-gold-500 text-onyx-950 hover:bg-gold-400 active:bg-gold-600 shadow-[inset_0_-1px_0_rgb(0_0_0/0.12)]',
+  dark: 'bg-onyx-900 text-bone-50 hover:bg-onyx-800 active:bg-onyx-950',
+  outline: 'border border-line-strong bg-white text-ink hover:border-onyx-600 hover:bg-bone-50',
+  ghost: 'text-ink-soft hover:bg-onyx-900/5 hover:text-ink',
   light: 'border border-bone-100/25 text-bone-50 hover:border-bone-100/60 hover:bg-bone-100/10',
   danger: 'bg-pole-500 text-white hover:bg-pole-600',
   'danger-ghost': 'text-pole-600 hover:bg-pole-50',

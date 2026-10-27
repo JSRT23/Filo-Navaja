@@ -30,7 +30,7 @@ export function Modal({
           <Dialog.Portal forceMount>
             <Dialog.Overlay asChild forceMount>
               <motion.div
-                className="fixed inset-0 z-50 bg-cordovan-950/55 backdrop-blur-[2px]"
+                className="fixed inset-0 z-50 bg-onyx-950/55 backdrop-blur-[2px]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -42,7 +42,7 @@ export function Modal({
                 <motion.div
                   className={cn(
                     'pointer-events-auto relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-xl shadow-pop sm:rounded-xl',
-                    dark ? 'bg-cordovan-900 text-bone-50' : 'bg-white text-ink',
+                    dark ? 'bg-onyx-900 text-bone-50' : 'bg-white text-ink',
                     SIZES[size],
                     className,
                   )}
@@ -151,7 +151,7 @@ export function Drawer({ open, onOpenChange, title, children, side = 'right', cl
           <Dialog.Portal forceMount>
             <Dialog.Overlay asChild forceMount>
               <motion.div
-                className="fixed inset-0 z-50 bg-cordovan-950/50"
+                className="fixed inset-0 z-50 bg-onyx-950/50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

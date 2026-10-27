@@ -14,7 +14,7 @@ export function SmartImage({ photo, src, alt, className, imgClassName, sizes = '
   const srcSet = !src && photo ? photoSrcSet(photo) : undefined;
 
   return (
-    <div className={cn('relative overflow-hidden bg-cordovan-800', className)}>
+    <div className={cn('relative overflow-hidden bg-onyx-800', className)}>
       {state !== 'error' && url && (
         <img
           src={url}
@@ -36,9 +36,9 @@ export function SmartImage({ photo, src, alt, className, imgClassName, sizes = '
       {state !== 'loaded' && (
         <div
           aria-hidden
-          className="absolute inset-0 grid place-items-center bg-[radial-gradient(120%_90%_at_30%_20%,#4b272a_0%,#2b1416_55%,#1e0e10_100%)]"
+          className="absolute inset-0 grid place-items-center bg-[radial-gradient(120%_90%_at_30%_20%,#2b2925_0%,#0e0d0b_55%,#070706_100%)]"
         >
-          <RazorMark className="size-12 text-brass-500/30" />
+          <RazorMark className="size-12 text-gold-500/30" />
         </div>
       )}
       {overlay}
