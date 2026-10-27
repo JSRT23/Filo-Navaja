@@ -1,0 +1,216 @@
+@import '@fontsource-variable/archivo/wdth.css';
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------
+   Filo & Navaja · tokens de diseño
+   Cordobán (cuero de las sillas), hueso (toallas), latón (herrajes),
+   acero (navaja), verde Sinú (el río de Montería) y rojo del poste.
+   --------------------------------------------------------------------- */
+@theme {
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --color-cordovan-950: #1e0e10;
+  --color-cordovan-900: #2b1416;
+  --color-cordovan-800: #3a1c1f;
+  --color-cordovan-700: #4b272a;
+  --color-cordovan-600: #6b3a3e;
+  --color-cordovan-500: #8c5257;
+
+  --color-bone-50: #f8f4ee;
+  --color-bone-100: #ede5d8;
+  --color-bone-200: #e2d7c5;
+  --color-bone-300: #cfc0a8;
+
+  --color-brass-300: #dcc092;
+  --color-brass-400: #c9a46c;
+  --color-brass-500: #b8925a;
+  --color-brass-600: #96743f;
+  --color-brass-700: #75592f;
+
+  --color-steel-300: #c3cacd;
+  --color-steel-400: #a9b3b8;
+  --color-steel-500: #8e9aa0;
+  --color-steel-600: #6c787e;
+
+  --color-sinu-50: #e8f0ec;
+  --color-sinu-100: #d3e3dc;
+  --color-sinu-500: #2f5d50;
+  --color-sinu-600: #244a40;
+  --color-sinu-700: #1b3830;
+
+  --color-pole-50: #f8e9e7;
+  --color-pole-100: #f1d3cf;
+  --color-pole-500: #b23a3a;
+  --color-pole-600: #922d2e;
+
+  --color-amber-50: #fbf2e1;
+  --color-amber-600: #8f5c0c;
+
+  /* Color de datos validado (croma y contraste ≥ 3:1 sobre blanco) */
+  --color-chart: #1f8061;
+  --color-chart-2: #a8651a;
+
+  --color-paper: #f6f4f1;
+  --color-line: #e6e0d7;
+  --color-line-strong: #d5ccbf;
+  --color-ink: #211a18;
+  --color-ink-soft: #5c524c;
+  --color-ink-mute: #71665e;
+
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --shadow-card: 0 1px 0 rgb(43 20 22 / 0.04), 0 1px 3px rgb(43 20 22 / 0.06);
+  --shadow-pop: 0 18px 50px -12px rgb(30 14 16 / 0.35), 0 4px 14px -4px rgb(30 14 16 / 0.18);
+  --shadow-ticket: 0 1px 0 rgb(43 20 22 / 0.05), 0 12px 30px -18px rgb(43 20 22 / 0.4);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* Ancho variable de Archivo: la marca vive en la tipografía condensada */
+@utility condensed {
+  font-stretch: 64%;
+}
+@utility semi-condensed {
+  font-stretch: 82%;
+}
+@utility display {
+  font-stretch: 62%;
+  font-weight: 820;
+  line-height: 0.86;
+  letter-spacing: -0.012em;
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    @apply bg-bone-50 text-ink antialiased;
+    font-feature-settings: 'ss01' 1;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brass-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--color-brass-300);
+    color: var(--color-cordovan-950);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  /* Línea punteada del menú de precios, como en el tablero de la barbería */
+  .leader {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    border-bottom: 1.5px dotted currentColor;
+    opacity: 0.35;
+    transform: translateY(-0.32em);
+  }
+  /* Rayas del poste de barbero (detalle de marca, se usa poco) */
+  .pole-stripes {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-pole-500) 0 8px,
+      var(--color-bone-100) 8px 16px,
+      var(--color-cordovan-900) 16px 24px,
+      var(--color-bone-100) 24px 32px
+    );
+  }
+  .skeleton {
+    background: linear-gradient(90deg, rgb(43 20 22 / 0.06) 25%, rgb(43 20 22 / 0.11) 37%, rgb(43 20 22 / 0.06) 63%);
+    background-size: 400% 100%;
+    animation: var(--animate-shimmer);
+  }
+  .skeleton-dark {
+    background: linear-gradient(90deg, rgb(237 229 216 / 0.06) 25%, rgb(237 229 216 / 0.12) 37%, rgb(237 229 216 / 0.06) 63%);
+    background-size: 400% 100%;
+    animation: var(--animate-shimmer);
+  }
+  /* Grano sutil para fotos con overlay */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    body * {
+      visibility: hidden;
+    }
+    .print-area,
+    .print-area * {
+      visibility: visible;
+    }
+    .print-area {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 80mm;
+      background: #fff !important;
+    }
+  }
+}

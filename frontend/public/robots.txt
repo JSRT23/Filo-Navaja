@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /panel
+Disallow: /kiosco
+Disallow: /mi-cuenta

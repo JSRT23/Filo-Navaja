@@ -1,0 +1,38 @@
+# Uso:
+#   Producción local (Nginx):   docker compose up --build           → http://localhost:8080
+#   Desarrollo (Vite + HMR):    docker compose --profile dev up dev → http://localhost:5173
+#
+# Funciona sin .env: trae por defecto la URL y la llave pública (publishable)
+# del proyecto Supabase «Filo&Nav». Si creas un .env, sus valores mandan.
+x-supabase: &supabase-defaults
+  VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-https://kkdozbodhmrmbhlysypl.supabase.co}
+  VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-sb_publishable_AS4gkph_9h5GLk71VGw9Jw_3VYSY7Fl}
+  VITE_ENABLE_REALTIME: ${VITE_ENABLE_REALTIME:-true}
+  VITE_DEMO_MODE: ${VITE_DEMO_MODE:-true}
+
+services:
+  web:
+    build:
+      context: .
+      target: prod
+      args: *supabase-defaults
+    image: filo-navaja-web:latest
+    container_name: filo-navaja-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      target: dev
+    container_name: filo-navaja-dev
+    environment:
+      <<: *supabase-defaults
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - /app/node_modules
