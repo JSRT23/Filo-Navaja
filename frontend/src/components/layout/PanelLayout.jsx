@@ -217,18 +217,16 @@ export default function PanelLayout() {
           <SidebarContent />
         </aside>
 
-        <div className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-line bg-white/90 px-4 backdrop-blur lg:hidden">
+        <div className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-onyx-800 bg-onyx-950 px-4 lg:hidden">
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="grid size-10 place-items-center rounded-sm text-ink hover:bg-paper"
+            className="grid size-10 place-items-center rounded-sm text-bone-50 hover:bg-bone-100/10"
             aria-label="Abrir menú del panel"
           >
             <MenuIcon className="size-5" />
           </button>
-          <div style={{ '--logo-pin': '#f8f4ee' }}>
-            <Logo to="/panel" tone="dark" />
-          </div>
+          <Logo to="/panel" />
           <span className="size-10" />
         </div>
 

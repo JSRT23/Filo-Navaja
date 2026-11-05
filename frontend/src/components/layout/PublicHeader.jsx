@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { CalendarDays, LayoutDashboard, LogOut, Menu as MenuIcon, UserRound, X } from 'lucide-react';
@@ -24,6 +25,7 @@ export function PublicHeader() {
   const { user, profile, role, signOut, isStaff } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const openButtonRef = useRef(null);
   const overHero = pathname === '/' && !scrolled;
 
   useEffect(() => {
@@ -36,11 +38,24 @@ export function PublicHeader() {
   useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) return undefined;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      setOpen(false);
+      openButtonRef.current?.focus();
+    };
+    window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
     };
   }, [open]);
+
+  const closeMenu = () => {
+    setOpen(false);
+    openButtonRef.current?.focus();
+  };
 
   const handleSignOut = async () => {
     await signOut();
@@ -136,6 +151,7 @@ export function PublicHeader() {
             Reservar turno
           </Button>
           <button
+            ref={openButtonRef}
             type="button"
             onClick={() => setOpen(true)}
             className="grid size-10 place-items-center rounded-sm text-bone-50 hover:bg-bone-100/10 md:hidden"
@@ -147,69 +163,78 @@ export function PublicHeader() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-50 flex flex-col bg-onyx-950 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menú"
-          >
-            <div className="flex h-16 items-center justify-between px-5">
-              <Logo />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="grid size-10 place-items-center rounded-sm text-bone-50 hover:bg-bone-100/10"
-                aria-label="Cerrar menú"
-              >
-                <X className="size-6" />
-              </button>
-            </div>
-            <nav aria-label="Móvil" className="flex flex-1 flex-col justify-center gap-1 px-6">
-              {[{ to: '/', label: 'Inicio' }, ...NAV].map((item, i) => (
-                <motion.div
-                  key={item.to}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.04 * i + 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      {createPortal(
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="fixed inset-0 z-50 flex h-dvh flex-col overflow-y-auto bg-onyx-950 pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menú"
+            >
+              <div className="flex h-16 shrink-0 items-center justify-between border-b border-bone-100/10 px-5">
+                <Logo />
+                <button
+                  type="button"
+                  autoFocus
+                  onClick={closeMenu}
+                  className="grid size-10 place-items-center rounded-sm text-bone-50 hover:bg-bone-100/10"
+                  aria-label="Cerrar menú"
                 >
-                  <NavLink
-                    to={item.to}
-                    end
-                    className={({ isActive }) => cn('display block py-1.5 text-6xl', isActive ? 'text-gold-400' : 'text-bone-50')}
+                  <X className="size-6" />
+                </button>
+              </div>
+              <nav aria-label="Móvil" className="flex flex-1 flex-col justify-center gap-1 px-6 py-8">
+                {[{ to: '/', label: 'Inicio' }, ...NAV].map((item, i) => (
+                  <motion.div
+                    key={item.to}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.04 * i + 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    {item.label}
-                  </NavLink>
-                </motion.div>
-              ))}
-            </nav>
-            <div className="grid gap-3 border-t border-bone-100/10 p-6">
-              <Button to="/reservar" size="lg">
-                Reservar turno
-              </Button>
-              {user ? (
-                <div className="grid grid-cols-2 gap-3">
-                  <Button to={isStaff ? homeForRole(role) : '/mi-cuenta'} variant="light">
-                    {isStaff ? 'Ir al panel' : 'Mis citas'}
-                  </Button>
-                  <Button variant="light" onClick={handleSignOut}>
-                    Cerrar sesión
-                  </Button>
-                </div>
-              ) : (
-                <Button to="/ingresar" variant="light">
-                  Ingresar
+                    <NavLink
+                      to={item.to}
+                      end
+                      className={({ isActive }) =>
+                        cn(
+                          'display block py-1.5 text-[clamp(2.75rem,13vw,3.75rem)] leading-none',
+                          isActive ? 'text-gold-400' : 'text-bone-50',
+                        )
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </nav>
+              <div className="grid shrink-0 gap-3 border-t border-bone-100/10 p-6">
+                <Button to="/reservar" size="lg">
+                  Reservar turno
                 </Button>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {user ? (
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button to={isStaff ? homeForRole(role) : '/mi-cuenta'} variant="light">
+                      {isStaff ? 'Ir al panel' : 'Mis citas'}
+                    </Button>
+                    <Button variant="light" onClick={handleSignOut}>
+                      Cerrar sesión
+                    </Button>
+                  </div>
+                ) : (
+                  <Button to="/ingresar" variant="light">
+                    Ingresar
+                  </Button>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </header>
   );
 }
