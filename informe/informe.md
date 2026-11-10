@@ -644,6 +644,7 @@ El proyecto cumplió su propósito: entregó un sistema que reúne reservas, asi
 | `ddc0b5d`, 9 nov 2026 | Despliegue final: revisión de seguridad, correos reales con Resend y 97 pruebas |
 | 14 migraciones | Del 26 al 27 de octubre de 2026, en `supabase/migrations/` |
 | 97 pruebas SQL | `scripts/test/sql/01_seguridad_y_flujos.sql`; terminan con "Todas las pruebas pasaron" |
+| Aplicación en línea | <https://filo-navaja.vercel.app> |
 | Cuentas de demostración | 15 cuentas, una por rol, listadas en el `README.md` del repositorio |
 | Documentos de Fase 1 y 2 | Fase1\_Barberia\_Filo\_y\_Navaja.docx y Fase2\_Planeacion\_Barberia\_Filo\_y\_Navaja.docx |
 
