@@ -115,6 +115,36 @@
 }
 
 @layer base {
+  /* Barra de desplazamiento: fondo negro y barra gris */
+  html {
+    scrollbar-color: #8a8780 #070706;
+    scrollbar-width: thin;
+  }
+  * {
+    scrollbar-color: #8a8780 #070706;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background: #070706;
+  }
+  ::-webkit-scrollbar-track {
+    background: #070706;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #8a8780;
+    border-radius: 6px;
+    border: 3px solid #070706;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a9a69e;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #070706;
+  }
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
