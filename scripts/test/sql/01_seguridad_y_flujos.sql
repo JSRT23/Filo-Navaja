@@ -334,4 +334,91 @@ select tests.ok((select is_anonymized and email is null and phone is null from p
                 'la supresión de datos borra la información personal y conserva el historial');
 rollback;
 
+-- ===================== Correcciones finales (revisión de cierre) =====================
+-- Reglas del negocio con límites
+begin;
+select tests.login('admin@filoynavaja.co');
+set local role authenticated;
+select tests.throws($$update public.app_settings set value = '0' where key = 'pin_max_attempts'$$, 'entre',
+                    'una regla con valor fuera de rango se rechaza (PIN con 0 intentos)');
+select tests.throws($$update public.app_settings set value = '"abc"' where key = 'slot_interval_minutes'$$, 'número',
+                    'una regla numérica no acepta texto');
+update public.app_settings set value = '10' where key = 'pin_lock_minutes';
+select tests.ok(true, 'una regla dentro del rango sí se guarda');
+rollback;
+
+-- Recepción solo edita notas internas por la API directa
+begin;
+select tests.login('recepcion.castellana@filoynavaja.co');
+set local role authenticated;
+select tests.throws($$update public.appointments set status = 'completed', price = 1 where branch_id = (select id from public.branches where slug = 'la-castellana')$$,
+                    'permission denied', 'recepción no cambia estado ni precio de una cita por la API directa');
+select tests.ok(true, 'recepción mantiene la edición de notas internas');
+update public.appointments set internal_notes = 'nota de prueba' where branch_id = :'castellana';
+rollback;
+
+-- Un cliente no puede tener dos citas a la vez
+begin;
+select id as otro_barbero from public.barbers where branch_id = :'castellana' and id <> :'carlos' and is_active limit 1 \gset
+insert into public.appointments (branch_id, barber_id, customer_id, service_id, starts_at, ends_at, price, source, status)
+select :'castellana', :'carlos', c.id, :'combo', now() + interval '50 hours', now() + interval '51 hours', 35000, 'phone', 'confirmed'
+from public.customers c where c.email = 'cliente@ejemplo.com';
+select tests.throws(format($q$insert into public.appointments (branch_id, barber_id, customer_id, service_id, starts_at, ends_at, price, source, status)
+  select %L, %L, c.id, %L, now() + interval '50 hours 30 minutes', now() + interval '51 hours 30 minutes', 35000, 'phone', 'confirmed'
+  from public.customers c where c.email = 'cliente@ejemplo.com'$q$, :'castellana', :'otro_barbero', :'combo'),
+  'appointments_customer_no_overlap', 'el mismo cliente no puede tener dos citas que se cruzan');
+rollback;
+
+-- Una venta anulada no impide volver a cobrar la cita
+select tests.ok(exists (select 1 from pg_indexes where indexname = 'sales_appointment_completed_uidx'),
+                'la unicidad de venta por cita solo aplica a ventas vigentes');
+
+-- El público no ve cantidades de inventario, solo disponibilidad
+begin;
+select tests.as_anon();
+set local role anon;
+select tests.ok((select count(*) from public.product_stock) = 0, 'el público no puede leer las cantidades de inventario');
+select tests.ok((select count(*) from public.product_availability) > 0, 'el público sí ve si hay o no producto por sede');
+rollback;
+
+-- Recepción no agenda en el pasado ni fuera de horario
+begin;
+select tests.login('recepcion.castellana@filoynavaja.co');
+set local role authenticated;
+select id as cli from public.customers where email = 'cliente@ejemplo.com' \gset
+select tests.throws(format('select public.staff_create_appointment(%L, %L, %L, now() - interval ''2 days'')', :'cli', :'carlos', :'combo'),
+                    'ya pasó', 'recepción no agenda una cita en el pasado');
+select tests.throws(format('select public.staff_create_appointment(%L, %L, %L, date_trunc(''day'', now() + interval ''3 days'') + interval ''3 hours'')', :'cli', :'carlos', :'combo'),
+                    'horario', 'recepción no agenda de madrugada, fuera del horario de la sede');
+rollback;
+
+-- La asistencia no se marca con la sesión personal del barbero
+begin;
+select tests.login('carlos@filoynavaja.co');
+set local role authenticated;
+select tests.throws(format('select public.register_attendance(%L, %L)', :'carlos', '2580'), 'no está autorizado',
+                    'el barbero no marca su asistencia desde su celular, solo en el kiosco de la sede');
+rollback;
+
+-- Las quincenas se cierran completas
+begin;
+select tests.login('admin@filoynavaja.co');
+set local role authenticated;
+select tests.throws($$select public.close_commission_period('2026-01-03', '2026-01-10')$$, 'quincena completa',
+                    'no se cierra un periodo parcial');
+rollback;
+
+-- La supresión de datos borra correos y notas
+begin;
+select tests.login('admin@filoynavaja.co');
+set local role authenticated;
+select id as sofia2 from public.customers where email = 'sofia@ejemplo.com' \gset
+select public.anonymize_customer(:'sofia2');
+reset role;
+select tests.ok(not exists (select 1 from public.email_outbox where to_email = 'sofia@ejemplo.com'),
+                'la supresión de datos elimina todos los correos del cliente');
+select tests.ok(not exists (select 1 from public.profiles where email = 'sofia@ejemplo.com'),
+                'la supresión de datos limpia el correo del perfil');
+rollback;
+
 \echo '✔ Todas las pruebas pasaron'

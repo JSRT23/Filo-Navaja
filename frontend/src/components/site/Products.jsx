@@ -6,11 +6,11 @@ import { Modal } from '@/components/ui/Modal';
 import { Img } from '@/components/ui/Img';
 import { sized } from '@/lib/images';
 
-/** Disponibilidad por sede a partir de product_stock */
+/** Disponibilidad por sede a partir de product_availability */
 export function availability(product, branches = []) {
   return branches.map((b) => {
-    const qty = product.product_stock?.find((s) => s.branch_id === b.id)?.quantity ?? 0;
-    return { branch: b, inStock: qty > 0, low: qty > 0 && qty <= 3 };
+    const inStock = product.availability?.find((s) => s.branch_id === b.id)?.in_stock ?? false;
+    return { branch: b, inStock, low: false };
   });
 }
 

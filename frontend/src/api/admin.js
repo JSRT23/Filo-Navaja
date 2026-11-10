@@ -1,6 +1,7 @@
 // Mutaciones de administración: catálogo, personal y configuración
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { invokeFunction, rpc, supabase, unwrap } from '@/lib/supabase';
+import { addDays, todayISO } from '@/lib/format';
 
 export function slugify(text = '') {
   return text
@@ -198,7 +199,7 @@ export function useAdminSettings() {
         supabase
           .from('branch_closures')
           .select('*')
-          .gte('closed_on', new Date(Date.now() - 86400000).toISOString().slice(0, 10))
+          .gte('closed_on', addDays(todayISO(), -1))
           .order('closed_on'),
       ]);
       return { settings: unwrap(settings), branches: unwrap(branches), closures: unwrap(closures) };

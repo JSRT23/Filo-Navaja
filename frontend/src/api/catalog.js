@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase, unwrap, publicUrl } from '@/lib/supabase';
+import { todayISO } from '@/lib/format';
 
 const LONG = 10 * 60 * 1000;
 
@@ -78,13 +79,20 @@ export function useProducts() {
         await supabase
           .from('products')
           .select(
-            'id, sku, name, brand, description, price, image_url, category:product_categories(id, name, slug, sort_order), product_stock(branch_id, quantity)',
+            'id, sku, name, brand, description, price, image_url, category:product_categories(id, name, slug, sort_order)',
           )
           .eq('is_active', true)
           .order('name'),
       );
+      // El público solo ve si hay o no producto por sede, nunca las cantidades
+      const stock = unwrap(await supabase.from('product_availability').select('product_id, branch_id, in_stock'));
       return rows
-        .map((p) => ({ ...p, price: Number(p.price), image: publicUrl('catalog', p.image_url) }))
+        .map((p) => ({
+          ...p,
+          price: Number(p.price),
+          image: publicUrl('catalog', p.image_url),
+          availability: stock.filter((s) => s.product_id === p.id),
+        }))
         .sort((a, b) => (a.category?.sort_order ?? 0) - (b.category?.sort_order ?? 0));
     },
   });
@@ -112,7 +120,7 @@ export function useClosures() {
         await supabase
           .from('branch_closures')
           .select('*')
-          .gte('closed_on', new Date().toISOString().slice(0, 10))
+          .gte('closed_on', todayISO())
           .order('closed_on')
           .limit(10),
       ),

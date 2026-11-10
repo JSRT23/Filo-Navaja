@@ -12,7 +12,7 @@ export default function Login() {
   const next = params.get('next');
 
   useEffect(() => {
-    if (user && role) navigate(next && next.startsWith('/') ? next : homeForRole(role), { replace: true });
+    if (user && role) navigate(next && /^\/(?!\/|\\)/.test(next) ? next : homeForRole(role), { replace: true });
   }, [user, role, next, navigate]);
 
   return (

@@ -7,7 +7,8 @@
 // "cron_secret" de Vault, que valida public.verify_cron_secret().
 //
 // Secretos de la función (supabase secrets set …):
-//   RESEND_API_KEY  clave de https://resend.com (si falta, modo prueba: solo registra)
+//   RESEND_API_KEY  clave de https://resend.com (si falta, los correos fallan y se reintentan)
+//   EMAIL_DRY_RUN   "true" para simular el envío sin Resend (solo desarrollo)
 //   EMAIL_FROM      "Filo & Navaja <citas@tudominio.com>" (dominio verificado en Resend)
 //   APP_URL         URL pública del frontend, p. ej. https://filoynavaja.co
 // =====================================================================
@@ -29,8 +30,13 @@ const BATCH_SIZE = 25;
 async function sendWithResend(to: string, subject: string, html: string, text: string): Promise<string> {
   const apiKey = Deno.env.get('RESEND_API_KEY');
   if (!apiKey) {
-    console.log(`[modo prueba] correo a ${to}: ${subject}`);
-    return 'dry-run';
+    // Solo se simula el envío si se pide de forma explícita; si no, el correo queda
+    // como fallido y se reintenta (nunca se marca como enviado sin haberse enviado).
+    if (Deno.env.get('EMAIL_DRY_RUN') === 'true') {
+      console.log(`[modo prueba] correo a ${to}: ${subject}`);
+      return 'dry-run';
+    }
+    throw new Error('RESEND_API_KEY no está configurada');
   }
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',

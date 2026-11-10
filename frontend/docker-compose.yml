@@ -8,7 +8,7 @@ x-supabase: &supabase-defaults
   VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-https://kkdozbodhmrmbhlysypl.supabase.co}
   VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-sb_publishable_AS4gkph_9h5GLk71VGw9Jw_3VYSY7Fl}
   VITE_ENABLE_REALTIME: ${VITE_ENABLE_REALTIME:-true}
-  VITE_DEMO_MODE: ${VITE_DEMO_MODE:-true}
+  VITE_DEMO_MODE: ${VITE_DEMO_MODE:-false}
 
 services:
   web:

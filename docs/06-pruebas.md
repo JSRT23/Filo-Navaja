@@ -1,6 +1,6 @@
 # 6. Pruebas
 
-`scripts/test/sql/01_seguridad_y_flujos.sql` contiene **82 pruebas** que simulan sesiones reales de Supabase (rol de Postgres + JWT) para cada tipo de usuario.
+`scripts/test/sql/01_seguridad_y_flujos.sql` contiene **97 pruebas** que simulan sesiones reales de Supabase (rol de Postgres + JWT) para cada tipo de usuario.
 
 ## Cómo correrlas
 

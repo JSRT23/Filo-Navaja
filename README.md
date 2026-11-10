@@ -25,7 +25,7 @@ Sistema SGB-FN completo: **backend en Supabase** y **frontend en React + Vite + 
 | Correos | Confirmación, recordatorio 24 h antes, cancelación y cambio de horario | `email_outbox` + Edge Function + pg_cron |
 | Datos personales | Autorización (Ley 1581 de 2012) y derecho de supresión | `delete-my-account`, `anonymize_customer()` |
 
-**Cifras del backend:** 26 tablas · 3 vistas · 49 políticas RLS · 25 funciones RPC para la app y 4 del sistema · 3 Edge Functions · 3 tareas programadas · 82 pruebas automáticas.
+**Cifras del backend:** 26 tablas · 4 vistas · 49 políticas RLS · 25 funciones RPC para la app y 4 del sistema · 3 Edge Functions · 3 tareas programadas · 97 pruebas automáticas.
 
 ## Estructura
 
@@ -33,7 +33,7 @@ Sistema SGB-FN completo: **backend en Supabase** y **frontend en React + Vite + 
 barberia-filo-navaja/
 ├── supabase/
 │   ├── config.toml                 # Configuración local de Supabase CLI
-│   ├── migrations/                 # Esquema versionado (13 migraciones, se aplican en orden)
+│   ├── migrations/                 # Esquema versionado (14 migraciones, se aplican en orden)
 │   │   ├── …_extensions_and_types.sql
 │   │   ├── …_core_tables.sql
 │   │   ├── …_helpers_and_triggers.sql
@@ -62,7 +62,9 @@ barberia-filo-navaja/
 
 ## Proyecto de desarrollo en la nube
 
-Ya está desplegado en Supabase (proyecto **Filo&Nav**, `kkdozbodhmrmbhlysypl`, us-east-1) con las 13 migraciones, el catálogo, los datos demo, las 3 Edge Functions y las 3 tareas programadas.
+Ya está desplegado en Supabase (proyecto **Filo&Nav**, `kkdozbodhmrmbhlysypl`, us-east-1) con las migraciones 1 a 13, el catálogo, los datos demo, las 3 Edge Functions y las 3 tareas programadas.
+
+> La migración `20261109210000_correcciones_finales.sql` (revisión de cierre) debe aplicarse con `supabase db push` o pegándola en el SQL Editor. Para correos reales: `supabase secrets set RESEND_API_KEY=… EMAIL_FROM=… APP_URL=… ALLOWED_ORIGIN=…` y `supabase functions deploy process-email-outbox`. Sin `RESEND_API_KEY` los correos quedan como fallidos y se reintentan (solo `EMAIL_DRY_RUN=true` simula el envío).
 
 ```
 VITE_SUPABASE_URL=https://kkdozbodhmrmbhlysypl.supabase.co
