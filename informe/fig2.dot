@@ -1,0 +1,31 @@
+digraph G {
+  rankdir=LR; splines=ortho; nodesep=0.35; ranksep=0.7; compound=true;
+  graph [fontname="Liberation Serif", fontsize=13, pad=0.2];
+  node  [shape=box, style="rounded,filled", fillcolor="#ffffff", color="#222222", fontname="Liberation Serif", fontsize=12, margin="0.18,0.10", penwidth=1.1];
+  edge  [color="#333333", arrowsize=0.7, penwidth=1.0, fontname="Liberation Serif", fontsize=10.5];
+
+  subgraph cluster_c { label="Clientes"; style="rounded"; color="#888888"; labeljust=l;
+    web [label="Aplicación web\nReact + Vite\n(clientes, recepción,\nbarberos y administración)"];
+    kiosk [label="Tablet de la sede\n(kiosco de asistencia)"];
+  }
+  subgraph cluster_s { label="Supabase"; style="rounded"; color="#888888"; labeljust=l;
+    auth [label="Auth\ncorreo y contraseña"];
+    api  [label="API (PostgREST)\ntablas + funciones RPC"];
+    sto  [label="Storage\navatars · barbers · catalog"];
+    ef   [label="Edge Functions\nadmin-create-staff\ndelete-my-account\nprocess-email-outbox"];
+    subgraph cluster_p { label="Postgres"; style="rounded,filled"; fillcolor="#f2f2f2"; color="#888888"; labeljust=l;
+      rls  [label="Tablas con RLS\n(26 tablas, 49 políticas)"];
+      rpc  [label="Funciones de negocio\n(security definer)"];
+      trg  [label="Triggers\ninventario, comisiones,\nauditoría y correos"];
+      cron [label="pg_cron\n(3 tareas)"];
+    }
+  }
+  resend [label="Resend\ncorreo transaccional", fillcolor="#eeeeee"];
+
+  web -> auth; web -> api; web -> sto; web -> ef;
+  kiosk -> api;
+  api -> rls; api -> rpc; rpc -> trg;
+  cron -> rpc [style=dashed, label=" cada 15 min"];
+  cron -> ef  [style=dashed, label=" cada 2 min"];
+  ef -> resend;
+}
