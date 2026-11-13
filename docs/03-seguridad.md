@@ -21,7 +21,7 @@
 | Reservar en línea | — | Sí | — | — | — |
 | Agendar por recepción | — | — | — | Su sede | Todas |
 | Cambiar estado de cita | — | — | Las suyas | Su sede | Todas |
-| Kiosco y marcación | — | — | Él mismo | Su sede | Todas |
+| Kiosco y marcación | — | — | Marca con su PIN en la tableta de la sede | Opera el kiosco de su sede | Todas |
 | Caja (ventas) | — | — | Solo sus ítems | Su sede, ≤ 20 % de descuento | Todas, anular |
 | Inventario | Existencias | Existencias | Ver movimientos | Entradas y ajustes de su sede | Todo, traslados |
 | Comisiones | — | — | Las suyas | — | Todas, cerrar quincena |
